@@ -1,7 +1,7 @@
 <template>
   <el-container>
-    <el-header style="text-align: right; font-size: 12px">
-      <h1 id="title">内网版本管理系统</h1>
+    <el-header style="text-align: right; font-size: 12px;">
+      <h1 id="title">anyTitle</h1>
       <el-dropdown>
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
@@ -60,7 +60,7 @@
 #title {
   position: absolute;
   left: 30px;
-  font-size: 18px;
+  font-size: 17px;
   line-height: 30px;
 }
 
