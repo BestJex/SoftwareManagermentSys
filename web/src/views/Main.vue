@@ -14,15 +14,15 @@
     </el-header>
     <el-container style="height: 100vh">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
+        <el-menu router :default-openeds="['1']">
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-s-order"></i>文件管理
-            </template>
+              <i class="el-icon-s-order"></i>版本管理
+            </template> 
             <el-menu-item-group>
               <template slot="title">Mc</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
+              <el-menu-item index="/mc/create">上传MC</el-menu-item>
+            <el-menu-item index="/mc/list">MC列表</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group>
               <template slot="title">An</template>
@@ -40,11 +40,7 @@
 
       <el-container>
         <el-main>
-          <el-table :data="tableData">
-            <el-table-column prop="date" label="日期" width="140"></el-table-column>
-            <el-table-column prop="name" label="版本名称" width="120"></el-table-column>
-            <el-table-column prop="address" label="版本详情"></el-table-column>
-          </el-table>
+              <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>
