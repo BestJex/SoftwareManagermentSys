@@ -16,6 +16,12 @@ module.exports = app => {
         res.send(item)
     })
 
+    router.delete('/',async(req,res)=>{
+        const data = await req.Model.findOneAndRemove(req.params.resource);
+        console.log(`删除${req.params.resource}中的${data}`);
+        res.send(data);
+    })
+
     app.use('/api/rest/:resource', async (req, res, next) => {
         const nodeName = require('inflection').classify(req.params.resource);
         req.Model = require(`../model/${nodeName}`)
