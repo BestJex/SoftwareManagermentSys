@@ -7,5 +7,9 @@
     "test": " "
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.8.1"
+  }
 }
