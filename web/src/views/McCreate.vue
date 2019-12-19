@@ -3,10 +3,10 @@
     <h1>上传文件:</h1>
     <el-form ref="model" :model="model" label-width="120px" @submit.native.prevent="save">
       <el-form-item label="版本号">
-        <el-input maxlength="10" v-model="model.name"></el-input>
+        <el-input maxlength="10" v-model="model.versionNumber"></el-input>
       </el-form-item>
       <el-form-item label="关联项目">
-        <el-select v-model="model.name" placeholder="请选择"></el-select>
+        <el-select v-model="model.relatedProject" placeholder="请选择"></el-select>
       </el-form-item>
       <el-form-item label="版本">
         <el-upload>
@@ -15,7 +15,7 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="版本特性">
-        <vue-editor v-model="model.body"></vue-editor>
+        <vue-editor v-model="model.versionFeatures"></vue-editor>
       </el-form-item>
     </el-form>
   </div>
@@ -28,14 +28,17 @@ export default {
   data() {
     return {
       model: {
-        name: "",
-        body: ""
+        versionNumber: "",
+        relatedProject: "",
+        fileDir: "",
+        versionFeatures: ""
       }
     };
   },
   components: {
     VueEditor
-  }
+  },
+  methods: {}
 };
 </script>
 
