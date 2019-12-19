@@ -4,10 +4,21 @@ module.exports = app => {
         mergeParams: true
     });
 
-    app.use(router);
-
-    router.get('/', (req, res) => {
-        res.send('ok')
+    router.post('/', async (req, res) => {
+        const model = await req.Model.create(req.body);
+        console.log(`创建数据${req.body}`)
+        res.send(model);
     })
 
+    router.get('/', async (req, res) => {
+        const item = await req.Model.find();
+        console.log(`获取${req.params.resource}列表`);
+        res.send(item)
+    })
+
+    app.use('/api/rest/:resource', async (req, res, next) => {
+        const nodeName = require('inflection').classify(req.params.resource);
+        req.Model = require(`../model/${nodeName}`)
+        next();
+    }, router);
 }

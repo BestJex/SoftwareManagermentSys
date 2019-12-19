@@ -8,14 +8,11 @@
       <el-form-item label="关联项目">
         <el-select v-model="model.relatedProject" placeholder="请选择"></el-select>
       </el-form-item>
-      <el-form-item label="版本">
-        <el-upload>
-          <el-button size="small" type="primary">点击上传</el-button>
-          <div slot="tip" class="el-upload__tip">大小不超过50m</div>
-        </el-upload>
-      </el-form-item>
       <el-form-item label="版本特性">
         <vue-editor v-model="model.versionFeatures"></vue-editor>
+      </el-form-item>
+      <el-form-item style="margin-top:1rem">
+        <el-button type="primary" native-type="subumit">保存</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -38,7 +35,16 @@ export default {
   components: {
     VueEditor
   },
-  methods: {}
+  methods: {
+    async save() {
+      let model = await this.$http.post("rest/mc", this.model);
+      this.$router.push("/mc/list");
+      this.$message({
+        type: "success",
+        message: "添加成功"
+      });
+    }
+  }
 };
 </script>
 
