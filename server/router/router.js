@@ -16,7 +16,7 @@ module.exports = app => {
         res.send(item)
     })
 
-    router.delete('/',async(req,res)=>{
+    router.delete('/', async (req, res) => {
         const data = await req.Model.findOneAndRemove(req.params.resource);
         console.log(`删除${req.params.resource}中的${data}`);
         res.send(data);
@@ -27,4 +27,16 @@ module.exports = app => {
         req.Model = require(`../model/${nodeName}`)
         next();
     }, router);
+
+    const multer = require('multer');
+    const upload = multer({
+        dest: __dirname + '/../upload'
+    })
+
+    app.post('/api/upload', upload.single('file'), async (req, res) => {
+        const file = req.file;
+        file.url = 'http://localhost:3322/upload/${file.name}'
+        console.log(file)
+        res.send(file);
+    })
 }
