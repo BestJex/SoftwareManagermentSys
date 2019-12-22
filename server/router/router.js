@@ -6,12 +6,12 @@ module.exports = app => {
 
     router.post('/', async (req, res) => {
         const model = await req.Model.create(req.body);
-        console.log(`创建数据${req.body}`)
+        console.log(`创建数据`, req.body)
         res.send(model);
     })
 
     router.get('/', async (req, res) => {
-        const item = await req.Model.find();
+        const item = await req.Model.find().populate('relatedProject');
         console.log(`获取${req.params.resource}列表`);
         res.send(item)
     })
@@ -23,6 +23,7 @@ module.exports = app => {
     })
 
     app.use('/api/rest/:resource', async (req, res, next) => {
+        console.log(req.params.resource)
         const nodeName = require('inflection').classify(req.params.resource);
         req.Model = require(`../model/${nodeName}`)
         next();
@@ -44,7 +45,6 @@ module.exports = app => {
     var upload = multer({
         storage: storage
     })
-
     app.post('/api/upload', upload.single('file'), async (req, res) => {
         console.log(req.body.fileName)
         const file = req.file;

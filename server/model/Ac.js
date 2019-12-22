@@ -16,4 +16,4 @@ const Schema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model('ac', Schema);
+module.exports = mongoose.model('Ac', Schema);

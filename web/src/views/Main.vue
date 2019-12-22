@@ -18,11 +18,11 @@
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-s-order"></i>版本管理
-            </template> 
+            </template>
             <el-menu-item-group>
               <template slot="title">Mc</template>
               <el-menu-item index="/mc/create">上传MC</el-menu-item>
-            <el-menu-item index="/mc/list">MC列表</el-menu-item>
+              <el-menu-item index="/mc/list">MC列表</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group>
               <template slot="title">An</template>
@@ -36,11 +36,23 @@
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
+        <el-menu router :default-openeds="['1']">
+          <el-submenu index="1">
+            <template slot="title">
+              <i class="el-icon-s-order"></i>项目管理
+            </template>
+            <el-menu-item-group>
+              <template slot="title">项目</template>
+              <el-menu-item index="/project/create">创建项目</el-menu-item>
+              <el-menu-item index="/project/list">项目列表</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+        </el-menu>
       </el-aside>
 
       <el-container>
         <el-main>
-              <router-view></router-view>
+          <router-view></router-view>
         </el-main>
       </el-container>
     </el-container>

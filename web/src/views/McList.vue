@@ -2,13 +2,10 @@
   <el-table :data="items" border style="width: 100%">
     <el-table-column prop="_id" label="id"></el-table-column>
     <el-table-column prop="versionNumber" label="版本号"></el-table-column>
-    <el-table-column
-      fixed="right"
-      label="操作"
-      width="120">
+    <el-table-column fixed="right" label="操作" width="120">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        <el-button type="text" size="small">编辑</el-button>
+        <el-button @click="$router.push(`/mc/edit/${scope.row._id}`)" type="text" size="small">编辑</el-button>
         <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
       </template>
     </el-table-column>
@@ -28,19 +25,22 @@ export default {
       console.log(data);
     },
 
-    async remove(row){
-      this.$confirm(`确定删除 ${row.versionNumber} 吗？,该操作不可逆`, '确认信息', {
+    async remove(row) {
+      this.$confirm(
+        `确定删除 ${row.versionNumber} 吗？,该操作不可逆`,
+        "确认信息",
+        {
           distinguishCancelAndClose: true,
-          confirmButtonText: '确定',
-          cancelButtonText: '取消'
-        })
-          .then(async () => {
-            const data = await this.$http.delete("/rest/mc");
-            this.$message({
-              type: 'info',
-              message: '保存修改'
-            });
-          })
+          confirmButtonText: "确定",
+          cancelButtonText: "取消"
+        }
+      ).then(async () => {
+        const data = await this.$http.delete("/rest/mc");
+        this.$message({
+          type: "info",
+          message: "保存修改"
+        });
+      });
       this.fetch();
     }
   },

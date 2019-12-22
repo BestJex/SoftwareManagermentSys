@@ -1,13 +1,20 @@
 /* eslint-disable no-console */
 <template>
   <div class="Mc">
-    <h1>上传文件:</h1>
+    <h1>{{id?'编辑':'上传'}}MC:</h1>
     <el-form ref="model" :model="model" label-width="120px" @submit.native.prevent="save">
       <el-form-item label="版本号">
         <el-input maxlength="10" v-model="model.versionNumber"></el-input>
       </el-form-item>
       <el-form-item label="关联项目">
-        <el-select v-model="model.relatedProject" placeholder="请选择"></el-select>
+        <el-select v-model="model.relatedProject" multiple placeholder="请选择">
+          <el-option
+            v-for="item in projectList"
+            :key="item._id"
+            :label="item.projectName"
+            :value="item._id"
+          ></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="版本特性">
         <vue-editor v-model="model.versionFeatures"></vue-editor>
@@ -36,6 +43,9 @@
 import { VueEditor } from "vue2-editor";
 export default {
   name: "createMC",
+  props: {
+    id: {}
+  },
   data() {
     return {
       model: {
@@ -45,6 +55,7 @@ export default {
         versionFeatures: "",
         name: "Mydata"
       },
+      projectList: [],
       fileData: { fileName: "" }
     };
   },
@@ -52,6 +63,15 @@ export default {
     VueEditor
   },
   methods: {
+    async fetchProject() {
+      const res = await this.$http.get("/rest/project");
+      this.projectList = res.data;
+      console.log(this.projectList);
+    },
+    async fetchEdit() {
+      const data = await this.$http.get(`/rest/mc/${this.id}`);
+      this.model = data.data;
+    },
     async save() {
       await this.$http.post("rest/mc", this.model);
       this.$router.push("/mc/list");
@@ -90,6 +110,10 @@ export default {
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     }
+  },
+  created() {
+    this.fetchProject();
+    this.id && this.fetchEdit();
   }
 };
 </script>
