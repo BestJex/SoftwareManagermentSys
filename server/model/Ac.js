@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = new mongoose.Schema({
     versionNumber: {
-        type: Number
+        type: String
     },
     relatedProject: {
         type: String,

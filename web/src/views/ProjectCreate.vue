@@ -7,7 +7,7 @@
         <el-input maxlength="10" v-model="model.projectName"></el-input>
       </el-form-item>
       <el-form-item label="项目简介">
-        <el-input maxlength="10" v-model="model.projectFeatures"></el-input>
+        <el-input v-model="model.projectFeatures"></el-input>
       </el-form-item>
       <el-form-item style="margin-top:1rem">
         <el-button type="primary" native-type="subumit">保存</el-button>

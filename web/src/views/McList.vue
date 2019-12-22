@@ -38,7 +38,7 @@ export default {
         const data = await this.$http.delete("/rest/mc");
         this.$message({
           type: "info",
-          message: "保存修改"
+          message: "删除成功"
         });
       });
       this.fetch();

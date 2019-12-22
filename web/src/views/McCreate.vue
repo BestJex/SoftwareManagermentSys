@@ -96,9 +96,12 @@ export default {
       // eslint-disable-next-line no-console
       console.log(file);
     },
-    handleProgress(file) {
+    async handleProgress(file) {
       console.log(`filessss`, file);
-      return (this.fileData.fileName = `MC_${this.model.versionNumber}`);
+      let reId = this.model.relatedProject[0];
+      const res = await this.$http.get(`/rest/project/${reId}`);
+
+      return (this.fileData.fileName = `MC_${this.model.versionNumber}_${res.data.projectName}`);
       // if (file.size > 5000000) {
       //   this.$confirm("文件大小不可以超过10M");
       //   return false;
