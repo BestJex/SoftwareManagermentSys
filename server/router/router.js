@@ -12,18 +12,30 @@ module.exports = app => {
 
     router.get('/', async (req, res) => {
         const item = await req.Model.find().populate('relatedProject');
-        console.log(`获取${req.params.resource}列表`);
+        console.log(`获取 ${req.params.resource}列表`);
+        res.send(item)
+    })
+
+    router.get('/:id', async (req, res) => {
+        const item = await req.Model.findById(req.params.id)
+        console.log(`查找 ${req.params.id}`);
+        res.send(item)
+    })
+
+    router.put('/:id', async (req, res) => {
+        const item = await req.Model.findByIdAndUpdate(req.params.id, req.body);
+        console.log(`查找 ${req.params.id}`);
         res.send(item)
     })
 
     router.delete('/', async (req, res) => {
         const data = await req.Model.findOneAndRemove(req.params.resource);
-        console.log(`删除${req.params.resource}中的${data}`);
+        console.log(`删除 ${req.params.resource}中的${data}`);
         res.send(data);
     })
 
     app.use('/api/rest/:resource', async (req, res, next) => {
-        console.log(req.params.resource)
+        console.log(`当前访问的表:`, req.params.resource)
         const nodeName = require('inflection').classify(req.params.resource);
         req.Model = require(`../model/${nodeName}`)
         next();

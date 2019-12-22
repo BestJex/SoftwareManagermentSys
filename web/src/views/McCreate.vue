@@ -64,16 +64,21 @@ export default {
   },
   methods: {
     async fetchProject() {
-      const res = await this.$http.get("/rest/project");
+      const res = await this.$http.get("rest/project");
       this.projectList = res.data;
       console.log(this.projectList);
     },
     async fetchEdit() {
-      const data = await this.$http.get(`/rest/mc/${this.id}`);
+      const data = await this.$http.get(`rest/mc/${this.id}`);
       this.model = data.data;
     },
     async save() {
-      await this.$http.post("rest/mc", this.model);
+      let res;
+      if (this.id) {
+        res = await this.$http.put(`rest/mc/${this.id}`, this.model);
+      } else {
+        res = await this.$http.post("rest/mc", this.model);
+      }
       this.$router.push("/mc/list");
       this.$message({
         type: "success",
@@ -112,8 +117,8 @@ export default {
     }
   },
   created() {
-    this.fetchProject();
     this.id && this.fetchEdit();
+    this.fetchProject();
   }
 };
 </script>
