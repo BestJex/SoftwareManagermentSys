@@ -60,7 +60,7 @@ module.exports = app => {
     app.post('/api/upload', upload.single('file'), async (req, res) => {
         console.log(req.body.fileName)
         const file = req.file;
-        file.url = 'http://localhost:3322/upload/${file.name}'
+        file.url = `http://localhost:3322/upload/${file.filename}`
         console.log(file)
         res.send(file);
     })

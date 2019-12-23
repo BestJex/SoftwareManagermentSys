@@ -97,23 +97,21 @@ export default {
       console.log(file);
     },
     async handleProgress(file) {
-      console.log(`filessss`, file);
+      if (file.size > 10000000) {
+        this.$confirm("文件大小不可以超过10M");
+        return false;
+      }
+      if (this.model.versionNumber == "") {
+        this.$confirm("必须输入版本号");
+        return false;
+      }
+      if (this.model.relatedProject == "") {
+        this.$confirm("必须选择关联项目");
+        return false;
+      }
       let reId = this.model.relatedProject[0];
       const res = await this.$http.get(`/rest/project/${reId}`);
-
-      return (this.fileData.fileName = `MC_${this.model.versionNumber}_${res.data.projectName}`);
-      // if (file.size > 5000000) {
-      //   this.$confirm("文件大小不可以超过10M");
-      //   return false;
-      // }
-      // if (this.model.versionNumber == "") {
-      //   this.$confirm("必须输入版本号");
-      //   return false;
-      // }
-      // if (this.model.versionFeatures == "") {
-      //   this.$confirm("必须选择关联项目");
-      //   return false;
-      // }
+      return (this.fileData.fileName = `Mc_${this.model.versionNumber}_${res.data.projectName}_${file.name}`);
     },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);

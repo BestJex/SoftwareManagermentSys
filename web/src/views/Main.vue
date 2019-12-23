@@ -24,16 +24,6 @@
               <el-menu-item index="/mc/create">上传MC</el-menu-item>
               <el-menu-item index="/mc/list">MC列表</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group>
-              <template slot="title">An</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group>
-              <template slot="title">Ac</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
           </el-submenu>
         </el-menu>
         <el-menu router :default-openeds="['1']">

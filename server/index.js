@@ -4,6 +4,7 @@ const PORT = 3322;
 
 app.use(require('cors')())
 app.use(express.json())
+app.use('/upload', express.static(__dirname + '/upload'))
 
 require('./plugin/db')(app);
 require('./router/router')(app);
