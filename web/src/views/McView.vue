@@ -5,6 +5,7 @@
       <el-tab-pane label="下载版本">
         <p>版本号:</p>
         <p>相关项目:</p>
+        <p>下载项目</p>
       </el-tab-pane>
       <el-tab-pane label="版本信息">版本信息</el-tab-pane>
       <el-tab-pane label="版本审计">版本审计</el-tab-pane>

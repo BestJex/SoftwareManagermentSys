@@ -1,3 +1,13 @@
 文件名约定:
-versionNumber_relatedProject_OriginalFileName
-示例:V123.1.1_浦东项目_InstallAc.zip
+
+参数：
+versionNumber:版本号
+relatedProject:关联项目
+originalFileName:原文件名
+
+示例:versionNumber_relatedProject_OriginalFileName
+
+示例:V123.1.1_浦东项目_InstallAc.zip.
+
+
+
