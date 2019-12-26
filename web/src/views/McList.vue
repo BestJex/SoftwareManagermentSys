@@ -38,14 +38,14 @@ export default {
           cancelButtonText: "取消"
         }
       ).then(async () => {
-        const data = await this.$http.delete("/rest/mc");
+        const data = await this.$http.delete(`/rest/mc/${row._id}`);
+        this.fetch();
         this.$notify({
           title: "成功",
           type: "success",
           message: "删除成功"
         });
       });
-      this.fetch();
     }
   },
   created() {

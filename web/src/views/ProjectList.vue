@@ -27,7 +27,7 @@ export default {
 
     async remove(row) {
       this.$confirm(
-        `确定删除 ${row.versionNumber} 吗？,该操作不可逆`,
+        `确定删除 ${row.projectName} 吗？,该操作不可逆`,
         "确认信息",
         {
           distinguishCancelAndClose: true,
@@ -35,13 +35,14 @@ export default {
           cancelButtonText: "取消"
         }
       ).then(async () => {
-        const data = await this.$http.delete("/rest/mc");
-        this.$message({
-          type: "info",
-          message: "保存修改"
+        const data = await this.$http.delete(`/rest/project/${row._id}`);
+        this.fetch();
+        this.$notify({
+          title: "成功",
+          type: "success",
+          message: "删除成功"
         });
       });
-      this.fetch();
     }
   },
   created() {
