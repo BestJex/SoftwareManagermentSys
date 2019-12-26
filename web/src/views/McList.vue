@@ -39,8 +39,9 @@ export default {
         }
       ).then(async () => {
         const data = await this.$http.delete("/rest/mc");
-        this.$message({
-          type: "info",
+        this.$notify({
+          title: "成功",
+          type: "success",
           message: "删除成功"
         });
       });

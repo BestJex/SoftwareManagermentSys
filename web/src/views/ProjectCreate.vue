@@ -29,9 +29,10 @@ export default {
     async save() {
       await this.$http.post("rest/project", this.model);
       this.$router.push("/project/list");
-      this.$message({
+      this.$notify({
+        title: "成功",
         type: "success",
-        message: "添加成功"
+        message: "添加项目成功"
       });
     }
   }

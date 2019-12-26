@@ -2,11 +2,17 @@
 <template>
   <div class="Mc">
     <h1>{{id?'编辑':'上传'}}MC:</h1>
-    <el-form ref="model" :model="model" label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="版本号">
-        <el-input maxlength="10" v-model="model.versionNumber"></el-input>
+    <el-form
+      ref="model"
+      :rules="rules"
+      :model="model"
+      label-width="120px"
+      @submit.native.prevent="save('model')"
+    >
+      <el-form-item label="版本号" prop="versionNumber">
+        <el-input maxlength="16" v-model="model.versionNumber"></el-input>
       </el-form-item>
-      <el-form-item label="关联项目">
+      <el-form-item label="关联项目" prop="relatedProject">
         <el-select v-model="model.relatedProject" multiple placeholder="请选择">
           <el-option
             v-for="item in projectList"
@@ -16,7 +22,7 @@
           ></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="版本特性">
+      <el-form-item label="版本特性" prop="versionFeatures">
         <vue-editor v-model="model.versionFeatures"></vue-editor>
       </el-form-item>
       <el-form-item label="Mc版本">
@@ -56,13 +62,40 @@ export default {
         name: "Mydata"
       },
       projectList: [],
-      fileData: { fileName: "" }
+      fileData: { fileName: "" },
+      rules: {
+        versionNumber: [
+          { required: true, message: "请输入版本号", trigger: "blur" },
+          { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
+        ],
+        relatedProject: [
+          {
+            type: "array",
+            required: true,
+            message: "请选择关联项目",
+            trigger: "blur"
+          }
+        ],
+        versionFeatures: [
+          { required: true, message: "请输入版本特性", trigger: "blur" }
+        ]
+      }
     };
   },
   components: {
     VueEditor
   },
   methods: {
+    submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          alert("error submit!!");
+          return false;
+        }
+      });
+    },
     async fetchProject() {
       const res = await this.$http.get("rest/project");
       this.projectList = res.data;
@@ -72,7 +105,8 @@ export default {
       const data = await this.$http.get(`rest/mc/${this.id}`);
       this.model = data.data;
     },
-    async save() {
+    async save(formName) {
+      let re = await this.$refs[formName].validate();
       let res;
       if (this.id) {
         res = await this.$http.put(`rest/mc/${this.id}`, this.model);
@@ -80,9 +114,10 @@ export default {
         res = await this.$http.post("rest/mc", this.model);
       }
       this.$router.push("/mc/list");
-      this.$message({
+      this.$notify({
+        title: "成功",
         type: "success",
-        message: "添加成功"
+        message: "添加版本成功"
       });
     },
     afterSuccess(file) {
