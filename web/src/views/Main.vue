@@ -69,6 +69,7 @@
 
 <script>
 export default {
+  name:'McCreate',
   data() {
     const item = {
       date: "2019-12-14",
