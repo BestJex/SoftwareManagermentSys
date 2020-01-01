@@ -2,11 +2,18 @@
 <template>
   <div class="Mc">
     <h1>创建项目:</h1>
-    <el-form ref="model" :model="model" label-width="120px" @submit.native.prevent="save">
-      <el-form-item label="项目名称">
+    <el-form
+      ref="model"
+      :model="model"
+      label-width="120px"
+      @submit.native.prevent="save"
+      :rules="rules"
+      name="CreateMcItem"
+    >
+      <el-form-item label="项目名称" prop="projectName">
         <el-input maxlength="10" v-model="model.projectName"></el-input>
       </el-form-item>
-      <el-form-item label="项目简介">
+      <el-form-item label="项目简介" prop="projectFeatures">
         <el-input v-model="model.projectFeatures"></el-input>
       </el-form-item>
       <el-form-item style="margin-top:1rem">
@@ -22,7 +29,17 @@ export default {
   name: "createMC",
   data() {
     return {
-      model: {}
+      model: {},
+      rules: {
+        projectName: [
+          { required: true, message: "请输入项目名称", trigger: "blur" },
+          { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
+        ],
+        projectFeatures: [
+          { required: true, message: "请输入项目名称", trigger: "blur" },
+          { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
+        ]
+      }
     };
   },
   methods: {

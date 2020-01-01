@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
 <template>
-  <div class="Mc">
-    <h1>{{id?'编辑':'上传'}}MC:</h1>
+  <div name="createMC" class="Mc">
+    <h1 name="title">{{id?'编辑':'上传'}}MC:</h1>
     <el-form
       ref="model"
       :rules="rules"
       :model="model"
       label-width="120px"
       @submit.native.prevent="save('model')"
+      class="sendItem"
     >
       <el-form-item label="版本号" prop="versionNumber">
-        <el-input maxlength="16" v-model="model.versionNumber"></el-input>
+        <el-input class="versionNum" maxlength="16" v-model="model.versionNumber"></el-input>
       </el-form-item>
       <el-form-item label="关联项目" prop="relatedProject">
         <el-select v-model="model.relatedProject" multiple placeholder="请选择">
@@ -39,7 +40,7 @@
         </el-upload>
       </el-form-item>
       <el-form-item style="margin-top:1rem">
-        <el-button type="primary" native-type="subumit">保存</el-button>
+        <el-button type="primary" class="save" native-type="subumit">保存</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -48,7 +49,7 @@
 <script>
 import { VueEditor } from "vue2-editor";
 export default {
-  name: "createMC",
+  name: "McCreate",
   props: {
     id: {}
   },

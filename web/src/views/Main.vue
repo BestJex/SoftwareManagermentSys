@@ -29,7 +29,7 @@
         <el-menu router :default-openeds="['1']">
           <el-submenu index="1">
             <template slot="title">
-              <i class="el-icon-s-order"></i>项目管理
+              <i class="el-icon-s-data"></i>项目管理
             </template>
             <el-menu-item-group>
               <template slot="title">项目</template>
@@ -69,7 +69,7 @@
 
 <script>
 export default {
-  name:'McCreate',
+  name: "McCreate",
   data() {
     const item = {
       date: "2019-12-14",
