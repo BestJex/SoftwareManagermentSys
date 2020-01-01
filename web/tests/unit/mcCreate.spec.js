@@ -36,7 +36,6 @@ describe('ProjectCreate.vue', () => {
 
     expect(sendProjectButton.exists()).toBe(true);
     sendProjectButton.trigger('click');
-    console.log(wrapper.vm.model.projectFeatures)
 
   })
 

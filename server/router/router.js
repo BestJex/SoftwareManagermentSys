@@ -29,7 +29,8 @@ module.exports = app => {
     })
 
     router.delete('/:id', async (req, res) => {
-        const data = await req.Model.findOneAndRemove(req.params.id);
+        console.log(req.params.id)
+        const data = await req.Model.findByIdAndDelete(req.params.id);
         console.log(`删除 ${req.params.resource} 中的 ${data}`);
         res.send(data);
     })
