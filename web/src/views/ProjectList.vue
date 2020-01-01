@@ -26,22 +26,19 @@ export default {
     },
 
     async remove(row) {
-      this.$confirm(
-        `确定删除 ${row.projectName} 吗？,该操作不可逆`,
-        "确认信息",
-        {
-          distinguishCancelAndClose: true,
-          confirmButtonText: "确定",
-          cancelButtonText: "取消"
-        }
-      ).then(async () => {
+      this.$confirm(`确定删除 ${row._id} 吗？,该操作不可逆`, "确认信息", {
+        distinguishCancelAndClose: true,
+        confirmButtonText: "确定",
+        cancelButtonText: "取消"
+      }).then(async () => {
+        console.log(row._id);
         const data = await this.$http.delete(`/rest/project/${row._id}`);
-        this.fetch();
         this.$notify({
           title: "成功",
           type: "success",
           message: "删除成功"
         });
+        this.fetch();
       });
     }
   },

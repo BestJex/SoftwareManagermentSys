@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 <template>
   <div class="Mc">
-    <h1>创建项目:</h1>
+    <h1 class="title">创建项目:</h1>
     <el-form
       ref="model"
       :model="model"
@@ -11,13 +11,13 @@
       name="CreateMcItem"
     >
       <el-form-item label="项目名称" prop="projectName">
-        <el-input maxlength="10" v-model="model.projectName"></el-input>
+        <el-input class="projectName" maxlength="10" v-model="model.projectName"></el-input>
       </el-form-item>
       <el-form-item label="项目简介" prop="projectFeatures">
-        <el-input v-model="model.projectFeatures"></el-input>
+        <el-input class="projectFeatures" v-model="model.projectFeatures"></el-input>
       </el-form-item>
       <el-form-item style="margin-top:1rem">
-        <el-button type="primary" native-type="subumit">保存</el-button>
+        <el-button class="sendProjectItem" type="primary" native-type="subumit">保存</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -36,7 +36,7 @@ export default {
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ],
         projectFeatures: [
-          { required: true, message: "请输入项目名称", trigger: "blur" },
+          { required: true, message: "请输入项目简介", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ]
       }

@@ -11,7 +11,7 @@
       class="sendItem"
     >
       <el-form-item label="版本号" prop="versionNumber">
-        <el-input class="versionNum" maxlength="16" v-model="model.versionNumber"></el-input>
+        <el-input id="versionNum" maxlength="16" v-model="model.versionNumber"></el-input>
       </el-form-item>
       <el-form-item label="关联项目" prop="relatedProject">
         <el-select v-model="model.relatedProject" multiple placeholder="请选择">
