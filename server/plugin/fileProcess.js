@@ -23,6 +23,10 @@ module.exports = app => {
         res.send(file);
     })
 
+    app.delete('/api/deleteFile/:path', (req, res) => {
+        res.send('res.send file ')
+    })
+
     // fs.unlink(filePath, (err) => {
     //     if (err) throw err;
     //     console.log('删除成功');

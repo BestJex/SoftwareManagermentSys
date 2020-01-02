@@ -32,7 +32,7 @@
           action="http://localhost:3322/api/upload"
           :on-success="afterSuccess"
           :before-upload="handleProgress"
-          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
           :data="fileData"
         >
           <el-button size="small" type="primary">点击上传</el-button>
@@ -121,19 +121,20 @@ export default {
         message: "添加版本成功"
       });
     },
-    afterSuccess(file) {
-      alert(file);
-    },
     beforeRemove(file, fileList) {
       return this.$confirm(`确定移除 ${file.name}？`);
     },
+    afterSuccess(file) {
+      this.model.fileDir = file.url;
+      this.model.fileName = file.filename;
+    },
     handleRemove(file, fileList) {
       // eslint-disable-next-line no-console
-      alert(file, fileList);
+      console.log(file, fileList);
     },
     handlePreview(file) {
       // eslint-disable-next-line no-console
-      alert(file);
+      console.log(file);
     },
     async handleProgress(file) {
       if (file.size > 10000000) {
