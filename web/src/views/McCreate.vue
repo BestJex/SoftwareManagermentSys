@@ -122,15 +122,18 @@ export default {
       });
     },
     afterSuccess(file) {
-      console.log(file);
+      alert(file);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
     },
     handleRemove(file, fileList) {
       // eslint-disable-next-line no-console
-      console.log(file, fileList);
+      alert(file, fileList);
     },
     handlePreview(file) {
       // eslint-disable-next-line no-console
-      console.log(file);
+      alert(file);
     },
     async handleProgress(file) {
       if (file.size > 10000000) {
