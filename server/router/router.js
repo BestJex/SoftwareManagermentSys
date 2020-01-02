@@ -13,14 +13,15 @@ module.exports = app => {
     })
 
     router.get('/', async (req, res) => {
-        const item = await req.Model.find().populate('relatedProject');
+        const item = await req.Model.find()
         console.log(`获取 ${req.params.resource}列表`);
         res.send(item)
     })
 
     router.get('/:id', async (req, res) => {
-        const item = await req.Model.findById(req.params.id)
+        const item = await req.Model.findById(req.params.id).populate('relatedProject');
         console.log(`查找 ${req.params.id}`);
+        console.log(item)
         res.send(item)
     })
 

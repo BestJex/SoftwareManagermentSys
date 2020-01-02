@@ -17,7 +17,7 @@
         <el-select v-model="model.relatedProject" multiple placeholder="请选择">
           <el-option
             v-for="item in projectList"
-            :key="item._id"
+            :key="item.projectName"
             :label="item.projectName"
             :value="item._id"
           ></el-option>
@@ -100,7 +100,6 @@ export default {
     async fetchProject() {
       const res = await this.$http.get("rest/project");
       this.projectList = res.data;
-      console.log(this.projectList);
     },
     async fetchEdit() {
       const data = await this.$http.get(`rest/mc/${this.id}`);

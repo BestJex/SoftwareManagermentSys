@@ -7,8 +7,13 @@
         <div>版本号: {{model.versionNumber}}</div>
         <div>
           相关项目:
-          <el-tag>标签一</el-tag>
+          <el-tag
+            v-for="item in model.relatedProject"
+            :key="item._id"
+            size="small"
+          >{{item.projectName}}</el-tag>
         </div>
+
         <div>
           下载项目:
           <el-link v-bind:href="model.fileDir" type="info">{{model.fileName}}</el-link>
@@ -35,6 +40,7 @@ export default {
     async fetchItem() {
       const data = await this.$http.get(`/rest/mc/${this.id}`);
       this.model = data.data;
+      console.log(this.model);
     }
   },
   created() {
