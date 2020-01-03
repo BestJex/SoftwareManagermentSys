@@ -16,12 +16,21 @@ const Schema = new mongoose.Schema({
     relatedProject: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Project'
-    }]
-}, {
-    timestamps: {
-        createdAt: 'created',
-        updatedAt: 'updated'
+    }],
+    createTime: {
+        type: String,
+        default: () => {
+            return new Date().toLocaleString()
+        }
+    },
+    upDateTime: {
+        type: String,
+        default: () => {
+            return new Date().toLocaleString()
+        }
     }
+
+
 })
 
 

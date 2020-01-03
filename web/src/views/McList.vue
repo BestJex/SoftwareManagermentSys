@@ -4,13 +4,14 @@
     <el-table
       :data="items"
       :default-sort="{prop: 'items', order: 'descending'}"
-      border
       style="width: 100%"
     >
-      <el-table-column sortable prop="_id" label="id"></el-table-column>
+      <el-table-column sortable prop="createTime" label="创建时间"></el-table-column>
       <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
-      <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
-      <el-table-column fixed="right" label="操作" width="120">
+      <el-table-column fixed="right" label="操作" width="300">
+        <template slot="header" slot-scope="scope">
+          <el-input v-model="search" size="mini" placeholder="输入关键字搜索" />
+        </template>
         <template slot-scope="scope">
           <el-button @click="$router.push(`/mc/view/${scope.row._id}`)" type="text" size="small">查看</el-button>
           <el-button @click="$router.push(`/mc/edit/${scope.row._id}`)" type="text" size="small">编辑</el-button>
@@ -25,7 +26,10 @@
 export default {
   name: "mcList",
   data() {
-    return { items: [] };
+    return {
+      items: [],
+      search: ""
+    };
   },
   methods: {
     async fetch() {

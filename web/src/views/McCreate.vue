@@ -109,6 +109,8 @@ export default {
       let re = await this.$refs[formName].validate();
       let res;
       if (this.id) {
+        this.model.upDateTime = new Date().toLocaleString(); //输入更新时间
+        console.log(this.model);
         res = await this.$http.put(`rest/mc/${this.id}`, this.model);
       } else {
         res = await this.$http.post("rest/mc", this.model);
