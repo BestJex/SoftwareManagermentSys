@@ -27,6 +27,9 @@
 import { VueEditor } from "vue2-editor";
 export default {
   name: "createMC",
+  props: {
+    id: {}
+  },
   data() {
     return {
       model: {},
@@ -43,15 +46,26 @@ export default {
     };
   },
   methods: {
+    async fetchItem() {
+      const res = await this.$http.get(`/rest/project/${this.id}`);
+      this.model = res.data;
+    },
     async save() {
-      await this.$http.post("rest/project", this.model);
+      if (this.id) {
+        await this.$http.put(`rest/project/${this.id}`, this.model);
+      } else {
+        await this.$http.post("rest/project", this.model);
+        this.$notify({
+          title: "成功",
+          type: "success",
+          message: "添加项目成功"
+        });
+      }
       this.$router.push("/project/list");
-      this.$notify({
-        title: "成功",
-        type: "success",
-        message: "添加项目成功"
-      });
     }
+  },
+  created() {
+    this.id && this.fetchItem();
   }
 };
 </script>
