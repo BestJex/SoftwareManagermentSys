@@ -16,7 +16,12 @@ const Schema = new mongoose.Schema({
     relatedProject: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Project'
-    }],
+    }]
+}, {
+    timestamps: {
+        createdAt: 'created',
+        updatedAt: 'updated'
+    }
 })
 
 

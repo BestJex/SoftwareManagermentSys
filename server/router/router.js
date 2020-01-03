@@ -9,6 +9,7 @@ module.exports = app => {
     router.post('/', async (req, res) => {
         const model = await req.Model.create(req.body);
         console.log(`创建数据`, req.body)
+        console.log(model)
         res.send(model);
     })
 
@@ -28,6 +29,7 @@ module.exports = app => {
     router.put('/:id', async (req, res) => {
         const item = await req.Model.findByIdAndUpdate(req.params.id, req.body);
         console.log(`查找 ${req.params.id}`);
+        console.log(item)
         res.send(item)
     })
 

@@ -17,7 +17,7 @@
         <el-select v-model="model.relatedProject" multiple placeholder="请选择">
           <el-option
             v-for="item in projectList"
-            :key="item.projectName"
+            :key="item._id"
             :label="item.projectName"
             :value="item._id"
           ></el-option>

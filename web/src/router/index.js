@@ -9,7 +9,7 @@ import mcView from '../views/McView'
 import projectCreate from '../views/ProjectCreate'
 import projectList from '../views/ProjectList'
 
-
+import home from '../views/home'
 
 Vue.use(VueRouter)
 
@@ -50,6 +50,10 @@ export default new VueRouter({
       path: '/project/list',
       name: 'projectList',
       component: projectList
+    }, {
+      path: '/home',
+      name: 'home',
+      component: home
     }],
   }]
 })
