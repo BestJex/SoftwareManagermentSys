@@ -1,5 +1,6 @@
 module.exports = app => {
     const multer = require('multer');
+    const fs = require('fs');
     const uploadPath = (__dirname + '/../upload');
 
     const storage = multer.diskStorage({
@@ -19,17 +20,21 @@ module.exports = app => {
         console.log(req.body.fileName)
         const file = req.file;
         file.url = `http://localhost:3322/upload/${file.filename}`
+        file.fileName = file.filename;
         console.log(file)
         res.send(file);
     })
 
     app.delete('/api/deleteFile/:path', (req, res) => {
         res.send('res.send file ')
+
+        fs.unlink(`${uploadPath}/${req.params.path}`, (err) => {
+            if (err) {
+                console.log(err);
+            }
+            console.log('删除成功');
+        })
     })
 
-    // fs.unlink(filePath, (err) => {
-    //     if (err) throw err;
-    //     console.log('删除成功');
-    // })
 
 }

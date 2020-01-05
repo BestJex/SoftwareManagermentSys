@@ -2,7 +2,7 @@
   <div>
     <h1>Mc列表:</h1>
     <el-table
-      :data="items"
+      :data="items.filter(data => !search || data.versionNumber.toLowerCase().includes(search.toLowerCase()))"
       :default-sort="{prop: 'items', order: 'descending'}"
       style="width: 100%"
     >
@@ -47,15 +47,20 @@ export default {
           confirmButtonText: "确定",
           cancelButtonText: "取消"
         }
-      ).then(async () => {
-        const data = await this.$http.delete(`/rest/mc/${row._id}`);
-        this.fetch();
-        this.$notify({
-          title: "成功",
-          type: "success",
-          message: "删除成功"
+      )
+        .then(async () => {
+          await this.$http.delete(`/rest/mc/${row._id}`);
+          await this.$http.delete(`/deleteFile/${row.fileName}`);
+          this.fetch();
+          this.$notify({
+            title: "成功",
+            type: "success",
+            message: "删除成功"
+          });
+        })
+        .catch(err => {
+          console.log(`删除错误`, err);
         });
-      });
     }
   },
   created() {
