@@ -2,7 +2,7 @@
   <div>
     <h1>Mc列表:</h1>
     <el-table
-      :data="items.filter(data => !search || data.versionNumber.toLowerCase().includes(search.toLowerCase()))"
+      :data="items.slice((currentPage-1)*pagesize,currentPage*pagesize)"
       :default-sort="{prop: 'items', order: 'descending'}"
       style="width: 100%"
     >
@@ -19,6 +19,15 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage"
+      :page-sizes="[5, 10, 20, 40]"
+      :page-size="pagesize"
+      layout="total, prev, next, jumper"
+      :total="items.length"
+    ></el-pagination>
   </div>
 </template>
 
@@ -28,10 +37,20 @@ export default {
   data() {
     return {
       items: [],
-      search: ""
+      search: "",
+      currentPage: 1, //当前页
+      pagesize: 10 //    每页的数据
     };
   },
   methods: {
+    handleSizeChange: function(size) {
+      this.pagesize = size;
+      console.log(this.pagesize); //每页下拉显示数据
+    },
+    handleCurrentChange: function(currentPage) {
+      this.currentPage = currentPage;
+      console.log(this.currentPage); //点击第几页
+    },
     async fetch() {
       const data = await this.$http.get("/rest/mc");
       this.items = data.data;
