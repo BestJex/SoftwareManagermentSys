@@ -1,7 +1,7 @@
 module.exports = app => {
     const express = require('express');
-    const fs = require('fs');
     console.log(new Date().toLocaleString())
+
     const router = express.Router({
         mergeParams: true
     });

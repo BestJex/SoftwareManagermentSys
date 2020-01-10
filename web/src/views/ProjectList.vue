@@ -1,19 +1,22 @@
 <template>
-  <el-table :data="items" border style="width: 100%">
-    <el-table-column prop="projectName" label="项目名称"></el-table-column>
-    <el-table-column prop="projectFeatures" label="项目简介"></el-table-column>
-    <el-table-column fixed="right" label="操作" width="120">
-      <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-        <el-button
-          @click="$router.push(`/project/edit/${scope.row._id}`)"
-          type="text"
-          size="small"
-        >编辑</el-button>
-        <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+  <div>
+    <h1>项目列表:</h1>
+    <el-table :data="items" border style="width: 100%">
+      <el-table-column prop="projectName" label="项目名称"></el-table-column>
+      <el-table-column prop="projectFeatures" label="项目简介"></el-table-column>
+      <el-table-column fixed="right" label="操作" width="120">
+        <template slot-scope="scope">
+          <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+          <el-button
+            @click="$router.push(`/project/edit/${scope.row._id}`)"
+            type="text"
+            size="small"
+          >编辑</el-button>
+          <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+  </div>
 </template>
 
 <script>
