@@ -26,20 +26,21 @@
 <script>
 import { VueEditor } from "vue2-editor";
 export default {
-  name: "createMC",
+  name: "createProject",
   props: {
     id: {}
   },
   data() {
     return {
       model: {},
+      test: "test",
       rules: {
         projectName: [
-          { required: true, message: "请输入项目名称", trigger: "blur" },
+          { required: false, message: "请输入项目名称", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ],
         projectFeatures: [
-          { required: true, message: "请输入项目简介", trigger: "blur" },
+          { required: false, message: "请输入项目简介", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ]
       }
@@ -51,17 +52,17 @@ export default {
       this.model = res.data;
     },
     async save() {
-      if (this.id) {
-        await this.$http.put(`rest/project/${this.id}`, this.model);
-      } else {
-        await this.$http.post("rest/project", this.model);
-        this.$notify({
-          title: "成功",
-          type: "success",
-          message: "添加项目成功"
-        });
-      }
-      this.$router.push("/project/list");
+      // if (this.id) {
+      //   await this.$http.put(`rest/project/${this.id}`, this.model);
+      // } else {
+      await this.$http.post("rest/project", this.model);
+      this.$notify({
+        title: "成功",
+        type: "success",
+        message: "添加项目成功"
+      });
+      // }
+      // this.$router.push("/project/list");
     }
   },
   created() {

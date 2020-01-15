@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Element from 'element-ui'
 Vue.use(Element)
-
+import flushPromises from 'flush-promises'
 import {
   shallowMount
 } from '@vue/test-utils'
+
 import McCreate from '@/views/McCreate.vue'
 import ProjectCreate from '@/views/ProjectCreate.vue'
-
+import http from '../../src/http/http.js'
+Vue.prototype.$http = http;
 
 describe('ProjectCreate.vue', () => {
   const wrapper = shallowMount(ProjectCreate);
@@ -31,11 +33,13 @@ describe('ProjectCreate.vue', () => {
     expect(wrapper.vm.model.projectFeatures).toBe('由自动化测试输入');
   })
 
-  it('send project', () => {
+  it('send project', async () => {
     let sendProjectButton = wrapper.find('.sendProjectItem')
-
     expect(sendProjectButton.exists()).toBe(true);
-    sendProjectButton.trigger('click');
+    sendProjectButton.trigger('click', {
+      projectName: '1'
+    });
+    await flushPromises();
 
   })
 
