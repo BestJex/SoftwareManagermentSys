@@ -6,8 +6,7 @@
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>查看</el-dropdown-item>
-          <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
+          <el-dropdown-item>注销</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <span>Admin</span>
@@ -27,6 +26,16 @@
               <template slot="title">Mc</template>
               <el-menu-item index="/mc/create">上传MC</el-menu-item>
               <el-menu-item index="/mc/list">MC列表</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title">An</template>
+              <el-menu-item index="/an/create">上传AN</el-menu-item>
+              <el-menu-item index="/an/list">AN列表</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title">Ac</template>
+              <el-menu-item index="/ac/create">上传AC</el-menu-item>
+              <el-menu-item index="/ac/list">AC列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>

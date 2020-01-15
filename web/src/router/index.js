@@ -6,8 +6,19 @@ import mcCreate from '../views/McCreate'
 import mcList from '../views/McList'
 import mcView from '../views/McView'
 
+import anCreate from '../views/AnCreate'
+import anList from '../views/AnList'
+import anView from '../views/AnView'
+
+import acCreate from '../views/AcCreate'
+import acList from '../views/AcList'
+import acView from '../views/AcView'
+
 import projectCreate from '../views/ProjectCreate'
 import projectList from '../views/ProjectList'
+
+
+
 
 import home from '../views/home'
 
@@ -37,6 +48,42 @@ export default new VueRouter({
       path: '/mc/list',
       name: 'mcList',
       component: mcList
+    }, {
+      path: '/an/create',
+      name: 'anCreate',
+      component: anCreate
+    }, {
+      path: '/an/edit/:id',
+      name: 'anEdit',
+      component: anCreate,
+      props: true
+    }, {
+      path: '/an/view/:id',
+      name: 'anView',
+      component: anView,
+      props: true
+    }, {
+      path: '/an/list',
+      name: 'anList',
+      component: anList
+    }, {
+      path: '/ac/create',
+      name: 'acCreate',
+      component: acCreate
+    }, {
+      path: '/ac/edit/:id',
+      name: 'acEdit',
+      component: acCreate,
+      props: true
+    }, {
+      path: '/ac/view/:id',
+      name: 'acView',
+      component: acView,
+      props: true
+    }, {
+      path: '/ac/list',
+      name: 'acList',
+      component: acList
     }, {
       path: '/project/create',
       name: 'projectCreate',

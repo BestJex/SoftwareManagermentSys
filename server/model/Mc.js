@@ -29,8 +29,6 @@ const Schema = new mongoose.Schema({
             return new Date().toLocaleString()
         }
     }
-
-
 })
 
 

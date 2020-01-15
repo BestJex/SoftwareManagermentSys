@@ -32,4 +32,4 @@ const Schema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('Ac', Schema)
+module.exports = mongoose.model('An', Schema)
