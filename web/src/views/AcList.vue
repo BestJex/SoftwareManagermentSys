@@ -83,7 +83,10 @@ export default {
       )
         .then(async () => {
           await this.$http.delete(`/rest/Ac/${row._id}`);
-          await this.$http.delete(`/deleteFile/${row.fileName}`);
+          if (row.fileName == " " || row.fileName == undefined) {
+            //如果根本上传文件，就不用去后台删除文件了。
+            await this.$http.delete(`/deleteFile/${row.fileName}`);
+          }
           this.fetch();
           this.$notify({
             title: "成功",
