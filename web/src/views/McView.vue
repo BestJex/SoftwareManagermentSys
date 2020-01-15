@@ -1,11 +1,12 @@
 <template>
   <div>
-    <h1>anyTitle</h1>
-
+    <h1>版本：{{model.versionNumber}}</h1>
     <el-tabs type="border-card">
       <el-tab-pane label="下载版本">
-        <div>版本号: {{model.versionNumber}}</div>
-        <div>
+        <div class="versionItem">
+          <p>版本号: {{model.versionNumber}}</p>
+        </div>
+        <div class="versionItem">
           相关项目:
           <el-tag
             v-for="item in model.relatedProject"
@@ -13,8 +14,7 @@
             size="small"
           >{{item.projectName}}</el-tag>
         </div>
-
-        <div>
+        <div class="versionItem">
           下载项目:
           <el-link v-bind:href="model.fileDir" type="info">{{model.fileName}}</el-link>
         </div>
@@ -56,5 +56,9 @@ p {
 
 .el-link {
   font-size: 15px;
+}
+
+.versionItem {
+  margin: 10px;
 }
 </style>
