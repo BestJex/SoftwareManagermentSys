@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>项目列表:</h1>
+    <h1 class="title">项目列表:</h1>
     <el-table :data="items" border style="width: 100%">
       <el-table-column prop="projectName" label="项目名称"></el-table-column>
       <el-table-column prop="projectFeatures" label="项目简介"></el-table-column>

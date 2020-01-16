@@ -3,12 +3,11 @@
   <div class="Mc">
     <h1 class="title">创建项目:</h1>
     <el-form
-      ref="model"
       :model="model"
+      ref="model"
       label-width="120px"
-      @submit.native.prevent="save"
-      :rules="rules"
-      name="CreateMcItem"
+      @submit.native.prevent="save('model')"
+      name="CreateProject"
     >
       <el-form-item label="项目名称" prop="projectName">
         <el-input class="projectName" maxlength="10" v-model="model.projectName"></el-input>
@@ -33,14 +32,13 @@ export default {
   data() {
     return {
       model: {},
-      test: "test",
       rules: {
         projectName: [
-          { required: false, message: "请输入项目名称", trigger: "blur" },
+          { required: true, message: "请输入项目名称", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ],
         projectFeatures: [
-          { required: false, message: "请输入项目简介", trigger: "blur" },
+          { required: true, message: "请输入项目简介", trigger: "blur" },
           { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
         ]
       }
@@ -51,18 +49,19 @@ export default {
       const res = await this.$http.get(`/rest/project/${this.id}`);
       this.model = res.data;
     },
-    async save() {
-      // if (this.id) {
-      //   await this.$http.put(`rest/project/${this.id}`, this.model);
-      // } else {
-      await this.$http.post("rest/project", this.model);
-      this.$notify({
-        title: "成功",
-        type: "success",
-        message: "添加项目成功"
-      });
-      // }
-      // this.$router.push("/project/list");
+    async save(formName) {
+      await this.$refs[formName].validate(); //校验表单上是否有错误
+      if (this.id) {
+        await this.$http.put(`rest/project/${this.id}`, this.model);
+      } else {
+        await this.$http.post("rest/project", this.model);
+        this.$notify({
+          title: "成功",
+          type: "success",
+          message: "添加项目成功"
+        });
+      }
+      this.$router.push("/project/list");
     }
   },
   created() {
