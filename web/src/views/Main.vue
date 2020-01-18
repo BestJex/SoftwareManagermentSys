@@ -46,7 +46,7 @@
             </template>
             <el-menu-item-group>
               <template slot="title">项目</template>
-              <el-menu-item index="/project/create">创建项目</el-menu-item>
+              <el-menu-item class="projectCreate" index="/project/create">创建项目</el-menu-item>
               <el-menu-item index="/project/list">项目列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
