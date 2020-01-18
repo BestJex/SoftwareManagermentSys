@@ -24,13 +24,8 @@ class index {
         });
         const page = await browser.newPage();
         await page.goto('http://localhost:8080');
-
-        return {
-            browser,
-            page
-        };
+        return page;
     }
-
 };
 
 module.exports = index;
