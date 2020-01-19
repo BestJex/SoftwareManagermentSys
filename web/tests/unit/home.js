@@ -26,6 +26,9 @@ class index {
         await page.goto('http://localhost:8080');
         return page;
     }
+
+
+
 };
 
 module.exports = index;
