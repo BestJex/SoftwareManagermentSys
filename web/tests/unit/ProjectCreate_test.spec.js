@@ -10,7 +10,7 @@ class projectCreat {
     }
 
     async create() {
-        describe('Component', () => {
+        describe('创建项目(projectCreate.vue)', () => {
             let page;
 
             it('生成页面', async () => {
@@ -35,7 +35,7 @@ class projectCreat {
             })
 
             it('退出页面', async () => {
-                page.close()
+                page.closePage()
             })
 
         })

@@ -24,11 +24,12 @@ class index {
         });
         const page = await browser.newPage();
         await page.goto('http://localhost:8080');
+
+        page.closePage = async () => { //把page的close只当前页面，browser是关闭整个测试，把browser的close给到page身上，这样就可以在别的文件关闭测试了
+            await browser.close();
+        }
+
         return page;
     }
-
-
-
 };
-
 module.exports = index;
