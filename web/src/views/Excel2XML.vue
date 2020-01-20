@@ -15,7 +15,7 @@
           <div v-if="!model.fileName">
             <el-upload
               class="file-upload"
-              :action="$http.defaults.baseURL + '/upload'"
+              :action="$http.defaults.baseURL + '/excel2xml'"
               :on-success="afterSuccess"
               :before-upload="handleProgress"
               :data="fileData"
@@ -39,10 +39,19 @@ export default {
   data() {
     return {
       model: { fileName: "" },
-      url: "test"
+      url: "test",
+      fileData: { fileName: "" }
     };
   },
   methods: {
+    afterSuccess(file) {
+      console.log("upload  is ok");
+    },
+    async handleProgress(file) {
+      this.fileData.fileName = file.name;
+      console.log(this.fileData.fileName);
+    },
+
     async fetchTemplateURL() {
       let res = await this.$http.get("/download/switch/excel2xmlTemplate.xlsx");
       this.url = res.config.url;

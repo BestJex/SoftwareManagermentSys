@@ -50,4 +50,7 @@ module.exports = app => {
     //文件处理中间件
     require('../plugin/fileProcess')(app);
 
+    //excel2xml中间件
+    require('../plugin/switch/switch')(app);
+
 }
