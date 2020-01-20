@@ -39,7 +39,7 @@
         <div v-if="!model.fileName">
           <el-upload
             class="file-upload"
-            action="http://localhost:3322/api/upload"
+            :action="$http.defaults.baseURL + '/api.afterSuccess/upload'"
             :on-success="afterSuccess"
             :before-upload="handleProgress"
             :data="fileData"

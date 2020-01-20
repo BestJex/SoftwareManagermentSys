@@ -4,8 +4,7 @@
     <el-tabs type="border-card">
       <el-tab-pane label="Excel2xml">
         <div class="downloadTemplate">
-          下载模板
-          <el-link @click="downLoad" type="info"></el-link>
+          <el-link v-bind:href="url" type="primary">点击下载模板</el-link>
         </div>
       </el-tab-pane>
     </el-tabs>
@@ -21,7 +20,13 @@ export default {
     };
   },
   methods: {
-    downLoad() {}
+    async fetchTemplateURL() {
+      let res = await this.$http.get("/download/switch/excel2xmlTemplate.xlsx");
+      this.url = res.config.url;
+    }
+  },
+  created() {
+    this.fetchTemplateURL();
   }
 };
 </script>

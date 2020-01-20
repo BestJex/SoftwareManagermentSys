@@ -5,6 +5,7 @@ const PORT = 3322;
 app.use(require('cors')())
 app.use(express.json())
 app.use('/upload', express.static(__dirname + '/upload'))
+app.use('/api/download/switch', express.static(__dirname + '/plugin/switch'))
 app.use('/', express.static(__dirname + '/dist'))
 
 require('./plugin/db')(app);
