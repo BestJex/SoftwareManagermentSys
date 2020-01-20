@@ -17,6 +17,8 @@ import acView from '../views/AcView'
 import projectCreate from '../views/ProjectCreate'
 import projectList from '../views/ProjectList'
 
+import Excel2XML from '../views/Excel2XML';
+import XML2Excel from '../views/XML2Excel';
 
 
 
@@ -101,6 +103,14 @@ export default new VueRouter({
       path: '/home',
       name: 'home',
       component: home
+    }, {
+      path: '/tool/Excel2XML',
+      name: 'Excel2XML',
+      component: Excel2XML
+    }, {
+      path: '/tool/XML2Excel',
+      name: 'XML2Excel',
+      component: XML2Excel
     }],
   }]
 })

@@ -20,8 +20,9 @@ class index {
         let browser = await this.puppeteer.launch({
             executablePath: verflyChromiumVersion.executablePath,
             headless: false,
-            // slowMo :'500' //每个操作的延迟单位是毫秒，life is short but i want to slow down
+            slowMo: 10 //每个操作的延迟单位是毫秒，life is short but i want to slow down
         });
+
         const page = await browser.newPage();
         await page.goto('http://localhost:8080');
 

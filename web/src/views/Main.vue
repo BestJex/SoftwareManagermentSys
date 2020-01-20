@@ -11,13 +11,15 @@
       </el-dropdown>
       <span>Admin</span>
     </el-header>
+
     <el-container style="height: 100vh">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu router :default-openeds="['1']">
+        <el-menu router :default-active="$router.path">
           <el-menu-item index="/home">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
           </el-menu-item>
+
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-s-order"></i>版本管理
@@ -38,9 +40,8 @@
               <el-menu-item index="/ac/list">AC列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-        </el-menu>
-        <el-menu router :default-openeds="['1']">
-          <el-submenu index="1">
+
+          <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-s-data"></i>项目管理
             </template>
@@ -48,6 +49,17 @@
               <template slot="title">项目</template>
               <el-menu-item class="projectCreate" index="/project/create">创建项目</el-menu-item>
               <el-menu-item index="/project/list">项目列表</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-suitcase-1"></i>工具
+            </template>
+            <el-menu-item-group>
+              <template slot="title">交换机</template>
+              <el-menu-item class="excel2xml" index="/tool/excel2xml">Excel2XML</el-menu-item>
+              <el-menu-item class="xml2excel" index="/tool/xml2excel">XML2Excel</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>

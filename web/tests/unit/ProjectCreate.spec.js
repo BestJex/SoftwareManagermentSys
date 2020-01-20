@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const home = require('./home');
-const homeBrowser = new home(puppeteer).browser();
+const homeBrowser = new home(puppeteer);
 
 
 
@@ -34,18 +34,25 @@ class projectCreat {
                 await page.click('.sendProjectItem') //创建项目
             })
 
-            it('退出页面', async () => {
-                page.closePage()
+            it('确认项目创建成功', async () => {
+                let successMessage = await page.$eval('.el-notification__title', el => el.innerText)
+                expect(successMessage).toBe(`成功`)
             })
-
         })
     }
 
     async close() {
-        let page = await this.browser;
-        page.close()
+        describe('创建项目(projectCreate.vue)', () => {
+            let page;
+
+            it('关闭页面', async () => {
+                page = await this.browser;
+                await page.closePage();
+            })
+        })
     }
 }
 
-const project = new projectCreat(homeBrowser);
+const project = new projectCreat(homeBrowser.browser());
 project.create();
+project.close();
