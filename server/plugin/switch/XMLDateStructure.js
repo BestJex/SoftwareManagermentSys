@@ -26,17 +26,17 @@ module.exports = () => { //xml数据结构
                         Delay: 90
                     },
                     UnmanagedPorts: [{
-                        // Port: []
+                        Port: []
                     }],
                     Mib: {
-                        // vlanState: {
-                        // Enable: true,
-                        // Addin: 'h3cs5500vlanaddin.dll'
-                        // },
-                        // PrivateBridge: {
-                        // Enable: true,
-                        // Addin: 'h3c-s5500.dll'
-                        // }
+                        vlanState: {
+                            Enable: true,
+                            Addin: 'h3cs5500vlanaddin.dll'
+                        },
+                        PrivateBridge: {
+                            Enable: true,
+                            Addin: 'h3c-s5500.dll'
+                        }
                     }
                 }]
             }
