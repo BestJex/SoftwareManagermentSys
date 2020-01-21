@@ -3,8 +3,10 @@
 module.exports = app => {
     const multer = require('multer');
     const fs = require('fs');
-    const uploadPath = (__dirname + '/./temp');
+    const readExcel = require('./readExcel')
+    const excel2XML = require('./excel2XML')
 
+    const uploadPath = (__dirname + '/./temp');
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, uploadPath)
@@ -21,7 +23,10 @@ module.exports = app => {
     app.post('/api/excel2xml', upload.single('file'), async (req, res) => {
         console.log(req.body.fileName)
         const file = req.file;
+        const excelData = readExcel(file.path);
+        const XMLPath = excel2XML(excelData);
         console.log(file)
+        console.log(excelData)
         res.send(file);
     })
 
