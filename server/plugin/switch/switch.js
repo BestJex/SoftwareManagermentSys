@@ -25,8 +25,7 @@ module.exports = app => {
         const file = req.file;
         const excelData = readExcel(file.path);
         const XMLPath = excel2XML(excelData);
-        console.log(file)
-        console.log(excelData)
+        file.XMLPath = XMLPath;
         res.send(file);
     })
 
