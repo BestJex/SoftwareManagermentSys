@@ -4,7 +4,6 @@ module.exports = (excelData) => {
     let xmlData = require('./XMLDateStructure')(); //xml文件的数据结构
     xmlData.SNetManSwitchConfig.SwitchList.Switch = xmlData.SNetManSwitchConfig.SwitchList.Switch.slice(1); //删除数据结构中第一个示例模板
 
-    console.log(excelData)
     for (let i = 0; i < excelData.length; i++) {
         let xmlObj = require('./XMLDateStructure')().SNetManSwitchConfig.SwitchList.Switch[0]; //xml的数据结构，（obj是引用类型）
         let errMsg;
@@ -17,7 +16,7 @@ module.exports = (excelData) => {
         }
 
         if (excelData[i].SwitchIpUpLayer === undefined) {
-            delete xmlData.SNetManSwitchConfig.SwitchList.Switch[i].SwitchIpUpLayer;
+            delete xmlObj.BaseInfo.SwitchIpUpLayer;
         } else {
             xmlObj.BaseInfo.SwitchIpUpLayer = excelData[i].SwitchIpUpLayer;
         }
@@ -57,6 +56,8 @@ module.exports = (excelData) => {
 
     fs.writeFile(xmlFilePath, xml, (err) => {
         if (err) throw err;
-        return xmlFilePath = `http://localhost:3322/api/download/switch/temp/SwitchService.xml`
+        console.log('xml文件生成完毕')
     })
+
+    return xmlFilePath = `http://localhost:3322/api/download/switch/temp/SwitchService.xml`
 }

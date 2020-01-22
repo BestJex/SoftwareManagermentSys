@@ -23,9 +23,10 @@ module.exports = app => {
     app.post('/api/excel2xml', upload.single('file'), async (req, res) => {
         console.log(req.body.fileName)
         const file = req.file;
-        const excelData = readExcel(file.path);
-        const XMLPath = excel2XML(excelData);
-        file.XMLPath = XMLPath;
+        const excelData = readExcel(file.path); //读取excel
+        const XMLPath = excel2XML(excelData); //解析excel生成xml
+        file.XMLPath = XMLPath
+        console.log(file)
         res.send(file);
     })
 

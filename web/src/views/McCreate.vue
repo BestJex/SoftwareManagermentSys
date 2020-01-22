@@ -147,7 +147,6 @@ export default {
     },
 
     removeFile() {
-      console.log(this.model);
       return this.$confirm(`确定移除 ${this.model.fileName}？`)
         .then(async () => {
           const res = await this.$http.delete(
