@@ -20,15 +20,19 @@ import projectList from '../views/ProjectList'
 import Excel2XML from '../views/Excel2XML';
 import XML2Excel from '../views/XML2Excel';
 
-
-
 import home from '../views/home'
+
+import login from '../views/Login'
 
 Vue.use(VueRouter)
 
 
 export default new VueRouter({
   routes: [{
+    path:'/login',
+    name:'login',
+    component:login
+  },{
     path: '/',
     name: 'Main',
     component: Main,
