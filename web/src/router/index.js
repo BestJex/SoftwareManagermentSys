@@ -2,37 +2,40 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
 
-import mcCreate from '../views/McCreate'
-import mcList from '../views/McList'
-import mcView from '../views/McView'
+import mcCreate from '../views/Mc/McCreate'
+import mcList from '../views/Mc/McList'
+import mcView from '../views/Mc/McView'
 
-import anCreate from '../views/AnCreate'
-import anList from '../views/AnList'
-import anView from '../views/AnView'
+import anCreate from '../views/An/AnCreate'
+import anList from '../views/An/AnList'
+import anView from '../views/An/AnView'
 
-import acCreate from '../views/AcCreate'
-import acList from '../views/AcList'
-import acView from '../views/AcView'
+import acCreate from '../views/Ac/AcCreate'
+import acList from '../views/Ac/AcList'
+import acView from '../views/Ac/AcView'
 
-import projectCreate from '../views/ProjectCreate'
-import projectList from '../views/ProjectList'
+import userCreate from '../views/User/UserCreate'
+import userList from '../views/User/UserList'
 
-import Excel2XML from '../views/Excel2XML';
-import XML2Excel from '../views/XML2Excel';
+import projectCreate from '../views/Project/ProjectCreate'
+import projectList from '../views/Project/ProjectList'
+
+import Excel2XML from '../views/Tool/Excel2XML';
+import XML2Excel from '../views/Tool/XML2Excel';
 
 import home from '../views/home'
 
-import login from '../views/Login'
+import login from '../views/User/Login'
 
 Vue.use(VueRouter)
 
 
 export default new VueRouter({
   routes: [{
-    path:'/login',
-    name:'login',
-    component:login
-  },{
+    path: '/login',
+    name: 'login',
+    component: login
+  }, {
     path: '/',
     name: 'Main',
     component: Main,
@@ -103,6 +106,19 @@ export default new VueRouter({
       path: '/project/list',
       name: 'projectList',
       component: projectList
+    }, {
+      path: '/user/create',
+      name: 'userCreate',
+      component: userCreate
+    }, {
+      path: '/user/edit/:id',
+      name: 'userEdit',
+      component: userCreate,
+      props: true
+    }, {
+      path: '/user/list',
+      name: 'userList',
+      component: userList
     }, {
       path: '/home',
       name: 'home',

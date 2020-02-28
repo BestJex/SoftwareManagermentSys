@@ -54,6 +54,16 @@
 
           <el-submenu index="3">
             <template slot="title">
+              <i class="el-icon-s-data"></i>用户管理
+            </template>
+            <el-menu-item-group>
+              <template slot="title">用户</template>
+              <el-menu-item class="userCreate" index="/user/create">创建用户</el-menu-item>
+              <el-menu-item index="/user/list">用户列表</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-submenu index="4">
+            <template slot="title">
               <i class="el-icon-suitcase-1"></i>工具
             </template>
             <el-menu-item-group>
