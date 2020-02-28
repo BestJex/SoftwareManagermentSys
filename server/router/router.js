@@ -1,10 +1,13 @@
 module.exports = app => {
     const express = require('express');
+    const assert = require('http-assert');
     console.log(new Date().toLocaleString())
 
     const router = express.Router({
         mergeParams: true
     });
+
+    const authMiddleware = require('../plugin/Autho');
 
     router.post('/', async (req, res) => {
         const model = await req.Model.create(req.body);
@@ -40,41 +43,24 @@ module.exports = app => {
         res.send(data);
     })
 
-    app.use('/api/rest/:resource', async (req, res, next) => {
+    app.use('/api/rest/:resource', authMiddleware(), async (req, res, next) => {
         console.log(`当前访问的表:`, req.params.resource)
         const nodeName = require('inflection').classify(req.params.resource);
         req.Model = require(`../model/${nodeName}`)
         next();
     }, router);
 
-    router.post('/user/login', (req, res) => {
-        const { userName, passWord } = req.body;
-        const adminUser = require('../model/User');
-        const user = adminUser.findOne({ userName }).select('+passWord');
-
-        if (!user) {
-            return res.status(422).send({
-                message: '用户不存在'
-            })
-        }
-
-        const isValid = require('bcrypt').compareSync(passWord, user.passWord);
-        if (!isValid) {
-            return res.status(422).send({
-                message: "密码不正确"
-            })
-        }
-
-        const jwt = require('jsonwebtoken');
-        const token = jwt.sign({
-            id: user._id
-        }, 'token');
-        res.send(token)
+    app.use(async (err, req, res, next) => {
+        res.status(err.statusCode || 500).send({
+            message: err.message
+        })
     })
+
 
     //文件处理中间件
     require('../plugin/fileProcess')(app);
-
+    //用户登陆
+    require('../plugin/user')(app);
     //excel2xml中间件
     require('../plugin/switch/switch')(app);
 
