@@ -3,6 +3,7 @@
   <div class="Mc">
     <h1 class="title">创建项目:</h1>
     <el-form
+      :rules="rules"
       :model="model"
       ref="model"
       label-width="120px"

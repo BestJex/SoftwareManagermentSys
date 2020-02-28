@@ -5,10 +5,10 @@
       <el-card header="欢迎登陆信安软件管理系统" class="box-card">
         <el-form @submit.native.prevent="login">
           <el-form-item>
-            <el-input placeholder="请输入账号" v-model="model.username"></el-input>
+            <el-input placeholder="请输入账号" v-model="model.userName"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-input placeholder="请输入密码" type="password" v-model="model.password"></el-input>
+            <el-input placeholder="请输入密码" type="password" v-model="model.passWord"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button class="SubBtn" type="primary" native-type="submit">登录</el-button>
@@ -30,8 +30,22 @@ export default {
   },
   methods: {
     async login() {
-      let res = await this.$http.post("/rest/user", this.model);
-      console.log(res);
+      if (!this.model.userName && !this.model.passWord) {
+        this.$message({
+          type: "error",
+          message: "账号或密码不能为空"
+        });
+        return;
+      }
+      let res = await this.$http.post("/user/login", this.model);
+      //sessionStorage.token = res.data.token;  //浏览器关闭token失效
+      localStorage.token = res.data; //浏览器关闭后token依然有效
+      this.$router.push("/");
+      this.$message({
+        type: "success",
+        message: "登录成功"
+      });
+      console.log(localStorage.token);
     }
   }
 };
