@@ -8,6 +8,7 @@ module.exports = app => {
     });
 
     const authMiddleware = require('../plugin/Autho');
+    const resourceMiddleware = require('../plugin/resource')
 
     router.post('/', async (req, res) => {
         const model = await req.Model.create(req.body);
@@ -43,12 +44,7 @@ module.exports = app => {
         res.send(data);
     })
 
-    app.use('/api/rest/:resource', authMiddleware(), async (req, res, next) => {
-        console.log(`当前访问的表:`, req.params.resource)
-        const nodeName = require('inflection').classify(req.params.resource);
-        req.Model = require(`../model/${nodeName}`)
-        next();
-    }, router);
+    app.use('/api/rest/:resource', authMiddleware(), resourceMiddleware(), router);
 
     app.use(async (err, req, res, next) => {
         res.status(err.statusCode || 500).send({
