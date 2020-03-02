@@ -70,11 +70,11 @@ export default {
   -moz-filter: blur(15px);
   -o-filter: blur(15px);
   -ms-filter: blur(15px);
-  filter: blur(0px);
+  filter: blur(2px);
 }
 
 .login {
-  width: 400px;
+  width: 420px;
   float: right;
   position: relative;
   margin-top: 23vh;

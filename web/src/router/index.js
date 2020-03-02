@@ -30,10 +30,13 @@ import login from '../views/User/Login'
 Vue.use(VueRouter)
 
 
-export default new VueRouter({
+const router = new VueRouter({
   routes: [{
     path: '/login',
     name: 'login',
+    meta: {
+      isPublic: true
+    },
     component: login
   }, {
     path: '/',
@@ -134,3 +137,12 @@ export default new VueRouter({
     }],
   }]
 })
+
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isPublic && !localStorage.token) {
+    next('/login')
+  }
+  next();
+})
+
+export default router
