@@ -10,7 +10,13 @@
       <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <template slot="header" slot-scope="scope">
-          <el-input @input="SearchTable" v-model="search" size="mini" :key='scope' placeholder="输入关键字搜索" />
+          <el-input
+            @input="SearchTable"
+            v-model="search"
+            size="mini"
+            :key="scope._id"
+            placeholder="输入关键字搜索"
+          />
         </template>
         <template slot-scope="scope">
           <el-button @click="$router.push(`/mc/view/${scope.row._id}`)" type="text" size="small">查看</el-button>

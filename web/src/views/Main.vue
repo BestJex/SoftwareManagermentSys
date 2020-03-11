@@ -1,15 +1,15 @@
 <template>
   <el-container>
-    <el-header style="text-align: right; font-size: 12px;">
-      <h1 id="title">anyTitle</h1>
+    <el-header style>
+      <h1 id="title">{{title}}</h1>
       <el-dropdown @command="handleCommand">
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <i class="el-icon-setting" style="margin-right: 15px;color:#FFFFFF"></i>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>查看</el-dropdown-item>
           <el-dropdown-item command="logOut">注销</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>{{this.userName}}</span>
+      <span>欢迎您 {{this.userName}}</span>
     </el-header>
 
     <el-container style="height: 100vh">
@@ -89,7 +89,8 @@ export default {
   name: "McCreate",
   data() {
     return {
-      userName: ""
+      userName: "",
+      title: "anyTitle"
     };
   },
   methods: {
@@ -115,9 +116,13 @@ export default {
 </script>
 <style>
 .el-header {
-  background-color: #b3c0d1;
-  color: #333;
+  background: #0290f1;
+  text-align: right;
+  font-size: 12px;
+  color: #ffffff;
   line-height: 60px;
+  box-shadow: 1px -5px 15px #0290f1;
+  z-index: 999;
 }
 
 #title {

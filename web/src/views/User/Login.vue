@@ -70,7 +70,7 @@ export default {
   -moz-filter: blur(15px);
   -o-filter: blur(15px);
   -ms-filter: blur(15px);
-  filter: blur(2px);
+  filter: blur(0px); /* 背景虚化 */
 }
 
 .login {

@@ -27,6 +27,7 @@ import home from '../views/home'
 
 import login from '../views/User/Login'
 
+import { Message } from 'element-ui';
 Vue.use(VueRouter)
 
 
@@ -140,6 +141,10 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (!to.meta.isPublic && !localStorage.token) {
+    Message({
+      type: 'error',
+      message: '请先登录'
+    })
     next('/login')
   }
   next();
