@@ -11,6 +11,10 @@
             <el-input placeholder="请输入密码" type="password" v-model="model.passWord"></el-input>
           </el-form-item>
           <el-form-item>
+            <el-input placeholder="请输入验证码" v-model="model.code"></el-input>
+            <div class="Captcha" @click="getCodeSrc" v-html="codeSrc"></div>
+          </el-form-item>
+          <el-form-item>
             <el-button class="SubBtn" type="primary" native-type="submit">登录</el-button>
           </el-form-item>
           <el-button class="ForgetPass" type="text">忘记密码?</el-button>
@@ -25,7 +29,8 @@ export default {
   name: "login",
   data() {
     return {
-      model: {}
+      model: {},
+      codeSrc: ""
     };
   },
   methods: {
@@ -48,7 +53,15 @@ export default {
         message: "登录成功"
       });
       console.log(localStorage.token);
+    },
+
+    async getCodeSrc() {
+      let res = await this.$http.get("/svgCaptcha");
+      this.codeSrc = res.data;
     }
+  },
+  created() {
+    this.getCodeSrc();
   }
 };
 </script>
