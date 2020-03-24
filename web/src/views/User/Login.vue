@@ -4,15 +4,17 @@
     <div class="login">
       <el-card header="欢迎登陆信安软件管理系统" class="box-card">
         <el-form @submit.native.prevent="login">
-          <el-form-item>
+          <el-form-item class="userName">
             <el-input placeholder="请输入账号" v-model="model.userName"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item class="passWord">
             <el-input placeholder="请输入密码" type="password" v-model="model.passWord"></el-input>
           </el-form-item>
-          <el-form-item>
+          <el-form-item class="captcha">
             <el-input placeholder="请输入验证码" v-model="model.code"></el-input>
-            <div class="Captcha" @click="getCodeSrc" v-html="codeSrc"></div>
+          </el-form-item>
+          <el-form-item>
+            <div @click="getCodeSrc" v-html="codeSrc"></div>
           </el-form-item>
           <el-form-item>
             <el-button class="SubBtn" type="primary" native-type="submit">登录</el-button>

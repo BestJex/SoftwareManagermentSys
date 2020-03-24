@@ -14,7 +14,7 @@
 
     <el-container style="height: 100vh">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu router :default-active="$router.path">
+        <el-menu open="[1]" router :default-active="$router.path">
           <el-menu-item index="/home">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
@@ -41,7 +41,7 @@
             </el-menu-item-group>
           </el-submenu>
 
-          <el-submenu index="2">
+          <el-submenu class="projectMan" index="2">
             <template slot="title">
               <i class="el-icon-s-data"></i>项目管理
             </template>
