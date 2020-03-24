@@ -54,6 +54,4 @@ class projectCreat {
   }
 }
 
-const project = new projectCreat(homeBrowser.browser());
-project.create();
-project.close();
+module.exports = projectCreat;

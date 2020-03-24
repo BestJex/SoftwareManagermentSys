@@ -16,9 +16,6 @@ class User {
 
       it("输入账号密码", async () => {
         await page.click(".userName");
-        await page.type(".userName", "123");
-
-        await page.click(".userName");
         await page.type(".userName", "xiaowu");
 
         await page.click(".passWord");
@@ -32,6 +29,7 @@ class User {
 
       it("点击登录", async () => {
         await page.click(".SubBtn ");
+        await page.waitForNavigation();
       });
     });
   }
@@ -47,6 +45,4 @@ class User {
   }
 }
 
-const user = new User(homeBrowser.browser());
-user.login();
-user.close();
+module.exports = User;
