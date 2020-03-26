@@ -6,7 +6,7 @@ const PORT = 3322;
 
 app.use(
   require("cors")({
-    origin: "http://localhost:8080",
+    origin: [`http://localhost:8080`, `http://192.168.1.172:8080`],
     credentials: true
   })
 );

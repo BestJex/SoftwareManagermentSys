@@ -163,15 +163,15 @@ const router = new VueRouter({
   ]
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (!to.meta.isPublic && !localStorage.token) {
-//     Message({
-//       type: 'error',
-//       message: '请先登录'
-//     })
-//     next('/login')
-//   }
-//   next();
-// })
+router.beforeEach((to, from, next) => {
+  if (!to.meta.isPublic && !localStorage.token) {
+    Message({
+      type: "error",
+      message: "请先登录"
+    });
+    next("/login");
+  }
+  next();
+});
 
 export default router;
