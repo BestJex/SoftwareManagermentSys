@@ -14,6 +14,7 @@ class index {
       //如果可以下载并且当前环境没有该版本的chromium的话就去执行下载
       verflyChromiumVersion = await browserFetcher.download("706915");
     } else {
+      //不行就打印出log
       console.log(`无法下载706915版本的chromium`, canDownload);
       return false;
     }
