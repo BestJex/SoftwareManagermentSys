@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       userName: "",
-      title: "anyTitle"
+      title: process.env.VUE_APP_TITLE || "anyTitle"
     };
   },
   methods: {
