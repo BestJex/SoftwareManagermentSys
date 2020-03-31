@@ -38,6 +38,7 @@
 </template>
 
 <script>
+import { restgetAll, restDeleteOne, deleteFile } from "../../Api/api";
 export default {
   name: "mcList",
   data() {
@@ -62,7 +63,7 @@ export default {
     },
 
     async fetch() {
-      const data = await this.$http.get("/rest/mc");
+      const data = await restgetAll("mc");
       this.items = data.data;
       this.tableProps = this.items;
       console.log(data);
@@ -88,10 +89,10 @@ export default {
         }
       )
         .then(async () => {
-          await this.$http.delete(`/rest/mc/${row._id}`);
-          if (row.fileName == " " || row.fileName == undefined) {
+          await restDeleteOne("mc", row._id);
+          if (!row.fileName == " " || !row.fileName == undefined) {
             //如果根本上传文件，就不用去后台删除文件了。
-            await this.$http.delete(`/deleteFile/${row.fileName}`);
+            await deleteFile(row.fileName);
           }
           this.fetch();
           this.$notify({

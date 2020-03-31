@@ -10,7 +10,13 @@
       <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <template slot="header" slot-scope="scope">
-          <el-input @input="SearchTable" v-model="search" size="mini" placeholder="输入关键字搜索" />
+          <el-input
+            :key="scope._id"
+            @input="SearchTable"
+            v-model="search"
+            size="mini"
+            placeholder="输入关键字搜索"
+          />
         </template>
         <template slot-scope="scope">
           <el-button @click="$router.push(`/an/view/${scope.row._id}`)" type="text" size="small">查看</el-button>
@@ -32,6 +38,7 @@
 </template>
 
 <script>
+import { restgetAll, restDeleteOne, deleteFile } from "../../Api/api";
 export default {
   name: "mcList",
   data() {
@@ -56,7 +63,7 @@ export default {
     },
 
     async fetch() {
-      const data = await this.$http.get("/rest/an");
+      const data = await restgetAll("an");
       this.items = data.data;
       this.tableProps = this.items;
       console.log(data);
@@ -82,10 +89,10 @@ export default {
         }
       )
         .then(async () => {
-          await this.$http.delete(`/rest/an/${row._id}`);
-          if (row.fileName == " " || row.fileName == undefined) {
+          await restDeleteOne("an", row._id);
+          if (!row.fileName == " " || !row.fileName == undefined) {
             //如果根本上传文件，就不用去后台删除文件了。
-            await this.$http.delete(`/deleteFile/${row.fileName}`);
+            await deleteFile(row.fileName);
           }
           this.fetch();
           this.$notify({

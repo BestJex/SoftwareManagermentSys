@@ -58,6 +58,8 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
+import { restgetAll, restgetOne, restGetData } from "../../Api/api";
+import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "AnCreate",
   props: {
@@ -92,12 +94,12 @@ export default {
   },
   methods: {
     async fetchProject() {
-      const res = await this.$http.get("rest/project");
+      const res = await restgetAll("project");
       this.projectList = res.data;
     },
 
     async fetchEdit() {
-      const data = await this.$http.get(`rest/an/${this.id}`);
+      const data = await restgetOne("an", this.id);
       this.model = data.data;
     },
 
@@ -106,9 +108,9 @@ export default {
       let res;
       if (this.id) {
         this.model.upDateTime = new Date().toLocaleString(); //输入更新时间
-        res = await this.$http.put(`rest/an/${this.id}`, this.model);
+        res = await restUpdata("an", this.id, this.model);
       } else {
-        res = await this.$http.post("rest/an", this.model);
+        res = await restPostData("an", this.model);
       }
       this.$router.push("/an/list");
       this.$notify({
@@ -142,17 +144,15 @@ export default {
         reId = this.model.relatedProject[0]._id; //因为编辑对象传过来的是一个对象
       }
       console.log(`reID`, reId);
-      const res = await this.$http.get(`/rest/project/${reId}`); //为了拼接文件名
-      return (this.fileData.fileName = `An_${this.model.versionNumber}_${res.data.projectName}_${file.name}`);
+      const getProjectName = await restgetOne("project", reId); //为了拼接文件名
+      return (this.fileData.fileName = `An_${this.model.versionNumber}_${getProjectName.data.projectName}_${file.name}`);
     },
 
     removeFile() {
       console.log(this.model);
       return this.$confirm(`确定移除 ${this.model.fileName}？`)
         .then(async () => {
-          const res = await this.$http.delete(
-            `/deleteFile/${this.model.fileName}`
-          );
+          const res = await deleteFile(this.model.fileName);
           this.model.fileName = "";
         })
         .catch(err => {
