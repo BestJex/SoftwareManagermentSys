@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { getCodeSrc, userLogin } from "../../Api/api";
 export default {
   name: "login",
   data() {
@@ -44,8 +45,9 @@ export default {
         });
         return;
       }
-      let res = await this.$http.post("/user/login", this.model);
-      //sessionStorage.token = res.data.token;  //浏览器关闭token失效
+      this.getCodeSrc(); //更新验证码
+      let res = await userLogin(this.model);
+      // sessionStorage.token = res.data.token; //浏览器关闭token失效
       localStorage.token = res.data; //浏览器关闭后token依然有效
       let user = JSON.parse(res.config.data); //获取用户名
       localStorage.userName = user.userName;
@@ -58,7 +60,7 @@ export default {
     },
 
     async getCodeSrc() {
-      let res = await this.$http.get("/svgCaptcha");
+      let res = await getCodeSrc();
       this.codeSrc = res.data;
     }
   },

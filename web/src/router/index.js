@@ -44,6 +44,7 @@ const router = new VueRouter({
       path: "/",
       name: "Main",
       component: Main,
+      redirect: "/home",
       children: [
         {
           path: "/mc/create",

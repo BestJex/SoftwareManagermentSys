@@ -5,6 +5,12 @@ module.exports = app => {
     const { userName, passWord, code } = req.body;
     const user = await adminUser.findOne({ userName }).select("+passWord");
 
+    if (!code) {
+      return res.status(422).send({
+        message: "请输入验证码"
+      });
+    }
+
     if (code.toLocaleLowerCase() !== req.session.captcha) {
       if (code !== "zhimakaimen") {
         return res.status(422).send({
