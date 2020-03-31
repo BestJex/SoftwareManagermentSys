@@ -26,6 +26,7 @@
 </template>
   
 <script>
+import { restgetOne } from "../../Api/api";
 export default {
   name: "mcView",
   props: {
@@ -38,7 +39,7 @@ export default {
   },
   methods: {
     async fetchItem() {
-      const data = await this.$http.get(`/rest/ac/${this.id}`);
+      const data = await restgetOne("ac", this.id);
       this.model = data.data;
       console.log(this.model);
     }

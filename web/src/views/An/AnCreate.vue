@@ -45,7 +45,7 @@
             :data="fileData"
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            <div slot="tip" class="el-upload__tip">格式不限，但是不超过100M</div>
           </el-upload>
         </div>
       </el-form-item>
@@ -142,7 +142,7 @@ export default {
         reId = this.model.relatedProject[0]._id; //因为编辑对象传过来的是一个对象
       }
       console.log(`reID`, reId);
-      const res = await this.$http.get(`/rest/project/${reId}`);
+      const res = await this.$http.get(`/rest/project/${reId}`); //为了拼接文件名
       return (this.fileData.fileName = `An_${this.model.versionNumber}_${res.data.projectName}_${file.name}`);
     },
 

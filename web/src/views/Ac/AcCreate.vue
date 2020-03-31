@@ -45,7 +45,7 @@
             :data="fileData"
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            <div slot="tip" class="el-upload__tip">格式不限，但是不超过100M</div>
           </el-upload>
         </div>
       </el-form-item>
@@ -58,6 +58,8 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
+import { restgetAll, restgetOne, restGetData } from "../../Api/api";
+import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "McCreate",
   props: {
@@ -92,12 +94,12 @@ export default {
   },
   methods: {
     async fetchProject() {
-      const res = await this.$http.get("rest/project");
+      const res = await restgetAll("project");
       this.projectList = res.data;
     },
 
     async fetchEdit() {
-      const data = await this.$http.get(`rest/ac/${this.id}`);
+      const data = await restgetOne("ac", this.id);
       this.model = data.data;
     },
 
@@ -106,9 +108,9 @@ export default {
       let res;
       if (this.id) {
         this.model.upDateTime = new Date().toLocaleString(); //输入更新时间
-        res = await this.$http.put(`rest/ac/${this.id}`, this.model);
+        res = await restUpdata("ac", this.id, this.model);
       } else {
-        res = await this.$http.post("rest/ac/", this.model);
+        res = await restPostData("ac", this.model);
       }
       this.$router.push("/ac/list");
       this.$notify({
@@ -142,18 +144,16 @@ export default {
         reId = this.model.relatedProject[0]._id; //因为编辑对象传过来的是一个对象
       }
       console.log(`reID`, reId);
-      const res = await this.$http.get(`/rest/project/${reId}`);
-      return (this.fileData.fileName = `Ac_${this.model.versionNumber}_${res.data.projectName}_${file.name}`);
+      const getProjectName = await restgetOne("project", reId);
+      return (this.fileData.fileName = `Ac_${this.model.versionNumber}_${getProjectName.data.projectName}_${file.name}`);
     },
 
     removeFile() {
       console.log(this.model);
       return this.$confirm(`确定移除 ${this.model.fileName}？`)
         .then(async () => {
-          const res = await this.$http.delete(
-            `/deleteFile/${this.model.fileName}`
-          );
-          this.model.fileName = "";
+          const res = await deleteFile(this.model.fileName);
+          this.model.fileName = ""; //文件名置空，便可重新上传文件
         })
         .catch(err => {
           console.log(`删除文件错误：`, err);

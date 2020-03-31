@@ -45,7 +45,7 @@
             :data="fileData"
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+            <div slot="tip" class="el-upload__tip">格式不限，但是不超过100M</div>
           </el-upload>
         </div>
       </el-form-item>
