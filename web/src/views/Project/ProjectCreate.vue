@@ -25,7 +25,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import {} from "../../Api/api";
+import { restgetOne, restUpdata, restPostData } from "../../Api/api";
 export default {
   name: "createProject",
   props: {
@@ -48,15 +48,15 @@ export default {
   },
   methods: {
     async fetchItem() {
-      const res = await this.$http.get(`/rest/project/${this.id}`);
+      const res = await restgetOne("project", this.id);
       this.model = res.data;
     },
     async save(formName) {
       await this.$refs[formName].validate(); //校验表单上是否有错误
       if (this.id) {
-        await this.$http.put(`rest/project/${this.id}`, this.model);
+        await restUpdata("project", this.id, this.model);
       } else {
-        await this.$http.post("rest/project", this.model);
+        await restPostData("project", this.model);
         this.$notify({
           title: "成功",
           type: "success",

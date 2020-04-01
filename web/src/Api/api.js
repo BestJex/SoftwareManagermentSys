@@ -38,6 +38,11 @@ let deleteFile = async parmas => {
   return await http.delete(`deleteFile/${parmas}`);
 };
 
+//交换机
+let getTemplate = async () => {
+  return await http.get("/download/switch/excel2xmlTemplate.xlsx");
+};
+
 export {
   getCodeSrc,
   userLogin,
@@ -47,5 +52,6 @@ export {
   restGetData,
   restgetAll,
   restDeleteOne,
-  deleteFile
+  deleteFile,
+  getTemplate
 };

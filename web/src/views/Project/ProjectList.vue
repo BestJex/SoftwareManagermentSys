@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { restgetAll, restDeleteOne } from "../../Api/api";
 export default {
   name: "mcList",
   data() {
@@ -27,7 +28,7 @@ export default {
   },
   methods: {
     async fetch() {
-      const data = await this.$http.get("/rest/project");
+      const data = await restgetAll("project");
       this.items = data.data;
       console.log(data);
     },
@@ -39,7 +40,7 @@ export default {
         cancelButtonText: "取消"
       }).then(async () => {
         console.log(row._id);
-        const data = await this.$http.delete(`/rest/project/${row._id}`);
+        const data = await restDeleteOne("project", row._id);
         this.$notify({
           title: "成功",
           type: "success",

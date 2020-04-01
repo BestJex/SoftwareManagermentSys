@@ -91,7 +91,7 @@ export default {
         .then(async () => {
           await restDeleteOne("an", row._id);
           if (!row.fileName == " " || !row.fileName == undefined) {
-            //如果根本上传文件，就不用去后台删除文件了。
+            //如果根本没上传文件，就不用去后台删除文件了。
             await deleteFile(row.fileName);
           }
           this.fetch();

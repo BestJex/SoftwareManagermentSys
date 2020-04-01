@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { getTemplate, deleteFile } from "../../Api/api";
 export default {
   name: "excel2xml",
   data() {
@@ -53,7 +54,7 @@ export default {
     },
 
     async fetchTemplateURL() {
-      let res = await this.$http.get("/download/switch/excel2xmlTemplate.xlsx");
+      let res = await getTemplate(); //获取导入模板
       this.url = res.config.url;
     },
 
@@ -61,9 +62,7 @@ export default {
       console.log(this.model);
       return this.$confirm(`确定移除 ${this.model.filename}？`)
         .then(async () => {
-          const res = await this.$http.delete(
-            `/deleteFile/${this.model.filename}`
-          );
+          const res = await deleteFile(this.model.filename);
           this.model.filename = "";
         })
         .catch(err => {
