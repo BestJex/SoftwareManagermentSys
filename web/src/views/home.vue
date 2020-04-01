@@ -34,7 +34,6 @@ export default {};
 
 .quicklyDownLoad {
   height: 37vh;
-  width: 30vw;
   margin-left: 15px;
 }
 .echarts {
