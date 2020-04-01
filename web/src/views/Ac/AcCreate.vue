@@ -58,7 +58,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import { restgetAll, restgetOne, restGetData } from "../../Api/api";
+import { restgetAll, restgetOne } from "../../Api/api";
 import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "McCreate",

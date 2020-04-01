@@ -63,7 +63,7 @@ export default {
     },
 
     async fetch() {
-      const data = await restgetAll("an");
+      const data = await restgetAll("an"); //获取所有Agent
       this.items = data.data;
       this.tableProps = this.items;
       console.log(data);

@@ -25,10 +25,6 @@ let restPostData = async (url, data) => {
   return await http.post(`rest/${url}`, data);
 };
 
-let restGetData = async (url, parmas) => {
-  return await http.get(`rest/${url}/${parmas}`);
-};
-
 let restDeleteOne = async (url, parmas) => {
   return await http.delete(`rest/${url}/${parmas}`);
 };
@@ -49,7 +45,6 @@ export {
   restgetOne,
   restUpdata,
   restPostData,
-  restGetData,
   restgetAll,
   restDeleteOne,
   deleteFile,
