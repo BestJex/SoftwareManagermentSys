@@ -8,6 +8,9 @@
       <el-card shadow="hover" class="box-card quicklyDownLoad">
         <div>快速下载</div>
       </el-card>
+      <el-card shadow="hover" class="box-card hotTag">
+        <div>快速下载</div>
+      </el-card>
       <el-card shadow="hover" class="box-card echarts">
         <div>系统内数据统计</div>
       </el-card>
@@ -34,9 +37,15 @@ export default {};
 
 .quicklyDownLoad {
   height: 37vh;
-
+  width: 30vw;
   margin-left: 15px;
 }
+.hotTag {
+  height: 37vh;
+  width: 20vw;
+  margin-left: 15px;
+}
+
 .echarts {
   height: 40vh;
   margin-top: 10px;

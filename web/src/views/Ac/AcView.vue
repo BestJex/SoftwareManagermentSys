@@ -19,7 +19,9 @@
           <el-link v-bind:href="model.fileDir" type="info">{{model.fileName}}</el-link>
         </div>
       </el-tab-pane>
-      <el-tab-pane label="版本信息">版本信息</el-tab-pane>
+      <el-tab-pane label="版本信息">
+        <div v-html="model.versionFeatures"></div>
+      </el-tab-pane>
       <el-tab-pane label="版本审计">版本审计</el-tab-pane>
     </el-tabs>
   </div>
