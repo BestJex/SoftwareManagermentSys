@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 <template>
-  <div name="createMC" class="Mc">
-    <h1 name="title">{{id?'编辑':'上传'}}MC:</h1>
+  <div name="createSoftWare" class="softWare">
+    <h1 name="title">{{id?'编辑':'上传'}}版本:</h1>
     <el-form
       ref="model"
       :rules="rules"
@@ -12,6 +12,11 @@
     >
       <el-form-item label="版本号" prop="versionNumber">
         <el-input id="versionNum" maxlength="16" v-model="model.versionNumber"></el-input>
+      </el-form-item>
+      <el-form-item label="版本类型" prop="versionType">
+        <el-select value-key="model.versionType" v-model="model.versionType" placeholder="请选择">
+          <el-option v-for="item in versionType" :key="item" :label="item" :value="item"></el-option>
+        </el-select>
       </el-form-item>
       <el-form-item label="关联项目" prop="relatedProject">
         <el-select
@@ -31,7 +36,7 @@
       <el-form-item label="版本特性" prop="versionFeatures">
         <vue-editor v-model="model.versionFeatures"></vue-editor>
       </el-form-item>
-      <el-form-item label="Mc版本">
+      <el-form-item label="上传软件">
         <el-row v-if="model.fileName">
           <el-link class="fileLink" v-bind:href="model.fileDir" target="_blank">{{model.fileName}}</el-link>
           <el-button size="mini" @click="removeFile" type="danger" icon="el-icon-delete" circle></el-button>
@@ -61,13 +66,14 @@ import { VueEditor } from "vue2-editor";
 import { restgetAll, restgetOne } from "../../Api/api";
 import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
-  name: "McCreate",
+  name: "SoftWareCreate",
   props: {
     id: {}
   },
   data() {
     return {
       model: { fileName: "" },
+      versionType: ["WebMc", "Mc", "An", "Ac"],
       projectList: [],
       fileData: { fileName: "" },
       rules: {
@@ -80,6 +86,14 @@ export default {
             type: "array",
             required: true,
             message: "请选择关联项目",
+            trigger: "blur"
+          }
+        ],
+        versionType: [
+          {
+            type: "string",
+            required: true,
+            message: "请选择版本类型",
             trigger: "blur"
           }
         ],
@@ -99,7 +113,7 @@ export default {
     },
 
     async fetchEdit() {
-      const data = await restgetOne("mc", this.id);
+      const data = await restgetOne("softWare", this.id);
       this.model = data.data;
     },
 
@@ -108,11 +122,11 @@ export default {
       let res;
       if (this.id) {
         this.model.upDateTime = new Date().toLocaleString(); //输入更新时间
-        res = await restUpdata("mc", this.id, this.model);
+        res = await restUpdata("softWare", this.id, this.model);
       } else {
-        res = await restPostData("mc", this.model);
+        res = await restPostData("softWare", this.model);
       }
-      this.$router.push("/mc/list");
+      this.$router.push("/softWare/list");
       this.$notify({
         title: "成功",
         type: "success",
@@ -145,7 +159,7 @@ export default {
       }
       console.log(`reID`, reId);
       const getProjectName = await restgetOne("project", reId); //为了拼接文件名
-      return (this.fileData.fileName = `Mc_${this.model.versionNumber}_${getProjectName.data.projectName}_${file.name}`);
+      return (this.fileData.fileName = `${this.model.versionType}_${this.model.versionNumber}_${getProjectName.data.projectName}_${file.name}`);
     },
 
     removeFile() {

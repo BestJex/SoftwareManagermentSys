@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Mc列表:</h1>
+    <h1>软件列表:</h1>
     <el-table
       :data="tableProps.slice((currentPage-1)*pagesize,currentPage*pagesize)"
       :default-sort="{prop: 'items', order: 'descending'}"
@@ -8,6 +8,7 @@
     >
       <el-table-column sortable prop="createTime" label="创建时间"></el-table-column>
       <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
+      <el-table-column sortable prop="versionType" label="版本类型"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <template slot="header" slot-scope="scope">
           <el-input
@@ -15,12 +16,20 @@
             v-model="search"
             size="mini"
             :key="scope._id"
-            placeholder="输入关键字搜索"
+            placeholder="输入版本号搜索"
           />
         </template>
         <template slot-scope="scope">
-          <el-button @click="$router.push(`/mc/view/${scope.row._id}`)" type="text" size="small">查看</el-button>
-          <el-button @click="$router.push(`/mc/edit/${scope.row._id}`)" type="text" size="small">编辑</el-button>
+          <el-button
+            @click="$router.push(`/softWare/view/${scope.row._id}`)"
+            type="text"
+            size="small"
+          >查看</el-button>
+          <el-button
+            @click="$router.push(`/softWare/edit/${scope.row._id}`)"
+            type="text"
+            size="small"
+          >编辑</el-button>
           <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -40,7 +49,7 @@
 <script>
 import { restgetAll, restDeleteOne, deleteFile } from "../../Api/api";
 export default {
-  name: "mcList",
+  name: "softWareList",
   data() {
     return {
       items: [],
@@ -63,7 +72,7 @@ export default {
     },
 
     async fetch() {
-      const data = await restgetAll("mc");
+      const data = await restgetAll("softWare");
       this.items = data.data;
       this.tableProps = this.items;
       console.log(data);
@@ -89,7 +98,7 @@ export default {
         }
       )
         .then(async () => {
-          await restDeleteOne("mc", row._id);
+          await restDeleteOne("softWare", row._id);
           if (!row.fileName == " " || !row.fileName == undefined) {
             //如果根本上传文件，就不用去后台删除文件了。
             await deleteFile(row.fileName);
