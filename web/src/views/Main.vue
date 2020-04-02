@@ -14,7 +14,7 @@
 
     <el-container style="height: 100vh">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu open="[1]" router :default-active="$router.path">
+        <el-menu open="[1]" router :default-active="$router.path" :collapse="false">
           <el-menu-item index="/home">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
@@ -90,7 +90,8 @@ export default {
   data() {
     return {
       userName: "",
-      title: process.env.VUE_APP_TITLE || "anyTitle"
+      title: process.env.VUE_APP_TITLE || "anyTitle",
+      isCollapse: true
     };
   },
   methods: {

@@ -1,43 +1,69 @@
 <template>
   <div>
-    <h1>首页</h1>
     <el-card shadow="always" class="home box-card">
-      <el-card shadow="hover" class="box-card user">
-        <div>用户信息展示</div>
-      </el-card>
-      <el-card shadow="hover" class="box-card quicklyDownLoad">
-        <div>快速下载</div>
-      </el-card>
-      <el-card shadow="hover" class="box-card echarts">
-        <div>系统内数据统计</div>
-      </el-card>
+      <el-row>
+        <el-col :span="8">
+          <el-card shadow="hover" class="box-card user">
+            <div>用户信息展示</div>
+          </el-card>
+        </el-col>
+        <el-col :span="8">
+          <el-card shadow="hover" class="box-card quicklyDownLoad">
+            <div>快速下载</div>
+          </el-card>
+        </el-col>
+        <el-col :span="8">
+          <el-card shadow="hover" class="box-card hotTag">
+            <hotTag></hotTag>
+          </el-card>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <el-card shadow="hover" class="box-card echarts">
+            <div>系统内数据统计</div>
+          </el-card>
+        </el-col>
+      </el-row>
     </el-card>
   </div>
 </template>
 
 <script>
-export default {};
+import hotTag from "../components/hotTag";
+export default {
+  name: "home",
+  data() {
+    return {};
+  },
+  components: {
+    hotTag
+  }
+};
 </script>
 
 <style scoped>
 .home {
-  height: 85vh;
-  min-height: 75vh;
-  min-width: 75vw;
+  height: 90vh;
+  min-height: 520px;
+  min-width: 758px;
 }
+
 .user {
   height: 37vh;
-  width: 20vw;
   margin-right: 10px;
-  float: left;
 }
 
 .quicklyDownLoad {
   height: 37vh;
-  margin-left: 15px;
+  margin-right: 10px;
+}
+
+.hotTag {
+  height: 37vh;
 }
 .echarts {
-  height: 40vh;
+  height: 46vh;
   margin-top: 10px;
 }
 </style>
