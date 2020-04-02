@@ -19,6 +19,9 @@
               :on-success="afterSuccess"
               :before-upload="handleProgress"
               :data="fileData"
+              :auto-upload="true"
+              accept=".xls, .xlsx"
+              :on-error="errSuccess"
             >
               <el-button size="small" type="primary">点击上传</el-button>
               <div slot="tip" class="el-upload__tip">只能上传excel文件，且不超过xxxkb</div>
@@ -50,12 +53,28 @@ export default {
       console.log(this.model);
     },
     async handleProgress(file) {
+      const testmsg = file.name.substring(file.name.lastIndexOf(".") + 1);
+      const extension = testmsg === "xls";
+      const extension1 = testmsg === "xlsx";
+      if (!extension && !extension1) {
+        this.$message({
+          message: "上传文件只能是 xls、xlsx格式!",
+          type: "warning"
+        });
+        return Promise.reject();
+      }
       this.fileData.fileName = file.name; //把文件名赋值到fileData中，前端取文件名
     },
 
     async fetchTemplateURL() {
       let res = await getTemplate(); //获取导入模板
       this.url = res.config.url;
+    },
+    errSuccess(err, file) {
+      this.$message({
+        type: "error",
+        message: err
+      });
     },
 
     removeFile() {
