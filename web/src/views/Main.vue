@@ -25,19 +25,9 @@
               <i class="el-icon-s-order"></i>版本管理
             </template>
             <el-menu-item-group>
-              <template slot="title">Mc</template>
-              <el-menu-item index="/mc/create">上传MC</el-menu-item>
-              <el-menu-item index="/mc/list">MC列表</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group>
-              <template slot="title">An</template>
-              <el-menu-item index="/an/create">上传AN</el-menu-item>
-              <el-menu-item index="/an/list">AN列表</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group>
-              <template slot="title">Ac</template>
-              <el-menu-item index="/ac/create">上传AC</el-menu-item>
-              <el-menu-item index="/ac/list">AC列表</el-menu-item>
+              <template slot="title">软件</template>
+              <el-menu-item index="/softWare/create">上传软件</el-menu-item>
+              <el-menu-item index="/softWare/list">软件列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 
@@ -54,7 +44,7 @@
 
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-s-data"></i>用户管理
+              <i class="el-icon-s-custom"></i>用户管理
             </template>
             <el-menu-item-group>
               <template slot="title">用户</template>

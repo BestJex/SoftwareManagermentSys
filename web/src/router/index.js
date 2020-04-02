@@ -2,9 +2,9 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "../views/Main.vue";
 
-import mcCreate from "../views/Mc/McCreate";
-import mcList from "../views/Mc/McList";
-import mcView from "../views/Mc/McView";
+import softWareCreate from "../views/softWare/softWareCreate";
+import softWareList from "../views/softWare/softWareList";
+import softWareView from "../views/softWare/softWareView";
 
 import anCreate from "../views/An/AnCreate";
 import anList from "../views/An/AnList";
@@ -47,26 +47,26 @@ const router = new VueRouter({
       redirect: "/home",
       children: [
         {
-          path: "/mc/create",
-          name: "mcCreate",
-          component: mcCreate
+          path: "/softWare/create",
+          name: "softWareCreate",
+          component: softWareCreate
         },
         {
-          path: "/mc/edit/:id",
-          name: "mcEdit",
-          component: mcCreate,
+          path: "/softWare/edit/:id",
+          name: "softWareEdit",
+          component: softWareCreate,
           props: true
         },
         {
-          path: "/mc/view/:id",
-          name: "mcView",
-          component: mcView,
+          path: "/softWare/view/:id",
+          name: "softWareView",
+          component: softWareView,
           props: true
         },
         {
-          path: "/mc/list",
-          name: "mcList",
-          component: mcList
+          path: "/softWare/list",
+          name: "softWareList",
+          component: softWareList
         },
         {
           path: "/an/create",

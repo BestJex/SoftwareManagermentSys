@@ -30,7 +30,7 @@
 <script>
 import { restgetOne } from "../../Api/api";
 export default {
-  name: "mcView",
+  name: "softWareView",
   props: {
     id: {}
   },
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     async fetchItem() {
-      const data = await restgetOne("mc", this.id);
+      const data = await restgetOne("softWare", this.id);
       this.model = data.data;
       console.log(this.model);
     }
