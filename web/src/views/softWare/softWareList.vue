@@ -16,7 +16,7 @@
             v-model="search"
             size="mini"
             :key="scope._id"
-            placeholder="输入关键字搜索"
+            placeholder="输入版本号搜索"
           />
         </template>
         <template slot-scope="scope">
