@@ -5,7 +5,7 @@
       v-for="item in model"
       :key="item._id"
       :disable-transitions="false"
-      v-on:click="tagClick(item._id)"
+      v-on:click="$router.push(`/softWare/list/${item._id}`)"
       type="info"
     >{{item.projectName}}</el-tag>
   </div>
@@ -26,9 +26,7 @@ export default {
       this.model = res.data;
     },
 
-    async tagClick(key) {
-      alert(key);
-    }
+    async tagClick(key) {}
   },
   created() {
     this.getProject();

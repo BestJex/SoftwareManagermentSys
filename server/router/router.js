@@ -66,4 +66,6 @@ module.exports = app => {
   require("../plugin/user")(app);
   //excel2xml中间件
   require("../plugin/switch/switch")(app);
+  //根据博客的标签去查找带有同样标签的博客
+  require("../plugin/findBlogTag")(app);
 };

@@ -69,6 +69,12 @@ const router = new VueRouter({
           component: softWareList
         },
         {
+          path: "/softWare/list/:id",
+          name: "softWareListFindTag",
+          props: true,
+          component: softWareList
+        },
+        {
           path: "/an/create",
           name: "anCreate",
           component: anCreate

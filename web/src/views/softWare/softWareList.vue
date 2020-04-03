@@ -50,6 +50,7 @@
 import { restgetAll, restDeleteOne, deleteFile } from "../../Api/api";
 export default {
   name: "softWareList",
+  props: { id: {} },
   data() {
     return {
       items: [],
@@ -64,7 +65,11 @@ export default {
       this.pagesize = size;
       console.log(this.pagesize); //每页下拉显示数据
     },
-
+    async findblogTag() {
+      const res = await this.$http.get(`/findBlogTag/${this.id}`);
+      this.items = res.data;
+      this.tableProps = this.items;
+    },
     handleCurrentChange: function(currentPage) {
       this.currentPage = currentPage;
       console.log(this.currentPage); //点击第几页
@@ -116,7 +121,7 @@ export default {
     }
   },
   created() {
-    this.fetch();
+    this.id ? this.findblogTag() : this.fetch();
   }
 };
 </script>
