@@ -1,13 +1,15 @@
 const express = require("express");
 const session = require("express-session");
-const cookieParser = require("cookie-parser");
+const dotenv = require("dotenv");
 const app = express();
 const PORT = 3322;
 
+dotenv.config("./env");
+console.log(process.env.TEST);
 app.use(
   require("cors")({
     origin: [`http://localhost:8080`, `http://192.168.1.172:8080`],
-    credentials: true
+    credentials: true,
   })
 );
 app.use(express.json());
@@ -19,10 +21,9 @@ app.use(
     httpOnly: false,
     saveUninitialized: true,
     signed: true,
-    overwrite: true
+    overwrite: true,
   })
 );
-
 app.use("/upload", express.static(__dirname + "/upload")); //上传组件
 app.use("/api/download/switch", express.static(__dirname + "/plugin/switch")); //转换后的文件下载
 app.use("/", express.static(__dirname + "/dist")); //静态文件托管

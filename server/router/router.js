@@ -1,14 +1,14 @@
-module.exports = app => {
+module.exports = (app) => {
   const express = require("express");
   const assert = require("http-assert");
   console.log(new Date().toLocaleString());
 
   const router = express.Router({
-    mergeParams: true
+    mergeParams: true,
   });
 
-  const authMiddleware = require("../plugin/Autho");
-  const resourceMiddleware = require("../plugin/resource");
+  const authMiddleware = require("../midware/Autho");
+  const resourceMiddleware = require("../midware/resource");
 
   router.post("/", async (req, res) => {
     const model = await req.Model.create(req.body);
@@ -55,7 +55,7 @@ module.exports = app => {
 
   app.use(async (err, req, res, next) => {
     res.status(err.statusCode || 500).send({
-      message: err.message
+      message: err.message,
     });
   });
   //文件处理中间件
