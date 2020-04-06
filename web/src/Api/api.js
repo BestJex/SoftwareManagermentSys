@@ -4,12 +4,12 @@ let getCodeSrc = async () => {
   return await http.get("/svgCaptcha");
 };
 //登录
-let userLogin = async parmas => {
+let userLogin = async (parmas) => {
   return await http.post("/user/login", parmas);
 };
 
 //restFullApi  url：路由路径 parimas：路由参数 data：需要传递的数据
-let restgetAll = async url => {
+let restgetAll = async (url) => {
   return await http.get(`rest/${url}`);
 };
 
@@ -30,7 +30,7 @@ let restDeleteOne = async (url, parmas) => {
 };
 
 //文件处理
-let deleteFile = async parmas => {
+let deleteFile = async (parmas) => {
   return await http.delete(`deleteFile/${parmas}`);
 };
 
@@ -48,5 +48,5 @@ export {
   restgetAll,
   restDeleteOne,
   deleteFile,
-  getTemplate
+  getTemplate,
 };

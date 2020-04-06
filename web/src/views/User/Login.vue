@@ -5,19 +5,31 @@
       <el-card header="欢迎登陆信安软件管理系统" class="box-card">
         <el-form @submit.native.prevent="login">
           <el-form-item class="userName">
-            <el-input placeholder="请输入账号" v-model="model.userName"></el-input>
+            <el-input
+              placeholder="请输入账号"
+              v-model="model.userName"
+            ></el-input>
           </el-form-item>
           <el-form-item class="passWord">
-            <el-input placeholder="请输入密码" type="password" v-model="model.passWord"></el-input>
+            <el-input
+              placeholder="请输入密码"
+              type="password"
+              v-model="model.passWord"
+            ></el-input>
           </el-form-item>
           <el-form-item class="captcha">
-            <el-input placeholder="请输入验证码" v-model="model.code"></el-input>
+            <el-input
+              placeholder="请输入验证码"
+              v-model="model.code"
+            ></el-input>
           </el-form-item>
           <el-form-item>
             <div @click="getCodeSrc" v-html="codeSrc"></div>
           </el-form-item>
           <el-form-item>
-            <el-button class="SubBtn" type="primary" native-type="submit">登录</el-button>
+            <el-button class="SubBtn" type="primary" native-type="submit"
+              >登录</el-button
+            >
           </el-form-item>
           <el-button class="ForgetPass" type="text">忘记密码?</el-button>
         </el-form>
@@ -33,7 +45,7 @@ export default {
   data() {
     return {
       model: {},
-      codeSrc: ""
+      codeSrc: "",
     };
   },
   methods: {
@@ -41,11 +53,10 @@ export default {
       if (!this.model.userName && !this.model.passWord) {
         this.$message({
           type: "error",
-          message: "账号或密码不能为空"
+          message: "账号或密码不能为空",
         });
         return;
       }
-      this.getCodeSrc(); //更新验证码
       let res = await userLogin(this.model);
       // sessionStorage.token = res.data.token; //浏览器关闭token失效
       localStorage.token = res.data; //浏览器关闭后token依然有效
@@ -54,7 +65,7 @@ export default {
       this.$router.push("/");
       this.$message({
         type: "success",
-        message: "登录成功"
+        message: "登录成功",
       });
       console.log(localStorage.token);
     },
@@ -62,11 +73,11 @@ export default {
     async getCodeSrc() {
       let res = await getCodeSrc();
       this.codeSrc = res.data;
-    }
+    },
   },
   created() {
     this.getCodeSrc();
-  }
+  },
 };
 </script>
 
