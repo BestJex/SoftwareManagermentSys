@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 <template>
   <div name="createSoftWare" class="softWare">
-    <h1 name="title">{{id?'编辑':'上传'}}版本:</h1>
+    <h1 name="title">{{ id ? "编辑" : "上传" }}版本:</h1>
     <el-form
       ref="model"
       :rules="rules"
@@ -11,11 +11,24 @@
       class="sendItem"
     >
       <el-form-item label="版本号" prop="versionNumber">
-        <el-input id="versionNum" maxlength="16" v-model="model.versionNumber"></el-input>
+        <el-input
+          id="versionNum"
+          maxlength="16"
+          v-model="model.versionNumber"
+        ></el-input>
       </el-form-item>
       <el-form-item label="版本类型" prop="versionType">
-        <el-select value-key="model.versionType" v-model="model.versionType" placeholder="请选择">
-          <el-option v-for="item in versionType" :key="item" :label="item" :value="item"></el-option>
+        <el-select
+          value-key="model.versionType"
+          v-model="model.versionType"
+          placeholder="请选择"
+        >
+          <el-option
+            v-for="item in versionType"
+            :key="item"
+            :label="item"
+            :value="item"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="关联项目" prop="relatedProject">
@@ -32,14 +45,33 @@
             :value="item._id"
           ></el-option>
         </el-select>
+        <el-tooltip
+          class="item"
+          effect="dark"
+          content="需要先创建项目"
+          placement="top-start"
+        >
+          <span class="help el-icon-question"></span>
+        </el-tooltip>
       </el-form-item>
       <el-form-item label="版本特性" prop="versionFeatures">
         <vue-editor v-model="model.versionFeatures"></vue-editor>
       </el-form-item>
       <el-form-item label="上传软件">
         <el-row v-if="model.fileName">
-          <el-link class="fileLink" v-bind:href="model.fileDir" target="_blank">{{model.fileName}}</el-link>
-          <el-button size="mini" @click="removeFile" type="danger" icon="el-icon-delete" circle></el-button>
+          <el-link
+            class="fileLink"
+            v-bind:href="model.fileDir"
+            target="_blank"
+            >{{ model.fileName }}</el-link
+          >
+          <el-button
+            size="mini"
+            @click="removeFile"
+            type="danger"
+            icon="el-icon-delete"
+            circle
+          ></el-button>
         </el-row>
         <div v-if="!model.fileName">
           <el-upload
@@ -50,12 +82,16 @@
             :data="fileData"
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">格式不限，但是不超过100M</div>
+            <div slot="tip" class="el-upload__tip">
+              格式不限，但是不超过100M
+            </div>
           </el-upload>
         </div>
       </el-form-item>
-      <el-form-item style="margin-top:1rem">
-        <el-button type="primary" class="save" native-type="subumit">保存</el-button>
+      <el-form-item style="margin-top: 1rem;">
+        <el-button type="primary" class="save" native-type="subumit"
+          >保存</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -68,7 +104,7 @@ import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "SoftWareCreate",
   props: {
-    id: {}
+    id: {},
   },
   data() {
     return {
@@ -79,32 +115,37 @@ export default {
       rules: {
         versionNumber: [
           { required: true, message: "请输入版本号", trigger: "blur" },
-          { min: 3, max: 15, message: "长度在 3 到 15 个字符", trigger: "blur" }
+          {
+            min: 3,
+            max: 15,
+            message: "长度在 3 到 15 个字符",
+            trigger: "blur",
+          },
         ],
         relatedProject: [
           {
             type: "array",
             required: true,
             message: "请选择关联项目",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         versionType: [
           {
             type: "string",
             required: true,
             message: "请选择版本类型",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         versionFeatures: [
-          { required: true, message: "请输入版本特性", trigger: "blur" }
-        ]
-      }
+          { required: true, message: "请输入版本特性", trigger: "blur" },
+        ],
+      },
     };
   },
   components: {
-    VueEditor
+    VueEditor,
   },
   methods: {
     async fetchProject() {
@@ -130,7 +171,7 @@ export default {
       this.$notify({
         title: "成功",
         type: "success",
-        message: "保存成功"
+        message: "保存成功",
       });
     },
 
@@ -168,20 +209,24 @@ export default {
           const res = await deleteFile(this.model.fileName);
           this.model.fileName = "";
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(`删除文件错误：`, err);
         });
-    }
+    },
   },
   created() {
     this.id && this.fetchEdit();
     this.fetchProject();
-  }
+  },
 };
 </script>
 
 <style>
 .fileLink {
   margin-right: 10px;
+}
+.help {
+  margin: 5px;
+  color: #cccccc;
 }
 </style>

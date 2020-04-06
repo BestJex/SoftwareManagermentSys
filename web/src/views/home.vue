@@ -37,8 +37,8 @@ export default {
     return {};
   },
   components: {
-    hotTag
-  }
+    hotTag,
+  },
 };
 </script>
 

@@ -7,7 +7,8 @@
       :disable-transitions="false"
       v-on:click="$router.push(`/softWare/list/${item._id}`)"
       type="info"
-    >{{item.projectName}}</el-tag>
+      >{{ item.projectName }}</el-tag
+    >
   </div>
 </template>
 
@@ -17,7 +18,7 @@ export default {
   name: "hotTag",
   data() {
     return {
-      model: {}
+      model: {},
     };
   },
   methods: {
@@ -26,16 +27,19 @@ export default {
       this.model = res.data;
     },
 
-    async tagClick(key) {}
+    async tagClick(key) {},
   },
   created() {
     this.getProject();
-  }
+  },
 };
 </script>
 
-<style>
+<style scoped>
 .hotTag {
-  margin-right: 5px;
+  margin: 0px 5px 5px 0px;
+}
+.hotTag:hover {
+  border: 1px solid #0097a7;
 }
 </style>
