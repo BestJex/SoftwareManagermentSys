@@ -1,6 +1,7 @@
 # backendManagermentSys
 
 自用后端软件管理系统
+主要用于管理公司软件，目前通用性一般，需要使用请酌情考虑。
 
 # web
 
