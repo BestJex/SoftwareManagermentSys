@@ -15,7 +15,7 @@ import projectList from "../views/Project/ProjectList";
 import Excel2XML from "../views/Tool/Excel2XML";
 import XML2Excel from "../views/Tool/XML2Excel";
 
-import home from "../views/home";
+import home from "../views/home/home";
 
 import login from "../views/User/Login";
 

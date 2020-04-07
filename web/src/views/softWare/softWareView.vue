@@ -9,6 +9,7 @@
         <div class="versionItem">
           相关项目:
           <el-tag
+            class="tag"
             v-for="item in model.relatedProject"
             :key="item._id"
             size="small"
@@ -63,5 +64,8 @@ p {
 
 .versionItem {
   margin: 10px;
+}
+.tag {
+  margin: 5px;
 }
 </style>

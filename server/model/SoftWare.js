@@ -2,38 +2,38 @@ const mongoose = require("mongoose");
 
 const Schema = new mongoose.Schema({
   versionNumber: {
-    type: String
+    type: String,
   },
   fileDir: {
-    type: String
+    type: String,
   },
   fileName: {
-    type: String
+    type: String,
   },
   versionType: {
-    type: String
+    type: String,
   },
   versionFeatures: {
-    type: String
+    type: String,
   },
   relatedProject: [
     {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: "Project"
-    }
+      ref: "Project",
+    },
   ],
   createTime: {
     type: String,
     default: () => {
       return new Date().toLocaleString();
-    }
+    },
   },
   upDateTime: {
     type: String,
     default: () => {
       return new Date().toLocaleString();
-    }
-  }
+    },
+  },
 });
 
 module.exports = mongoose.model("Mc", Schema);
