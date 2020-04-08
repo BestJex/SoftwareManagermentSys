@@ -1,15 +1,15 @@
-module.exports = excelData => {
+module.exports = (excelData) => {
   const fs = require("fs");
   const xml2js = require("xml2js");
   let xmlData = require("./XMLDateStructure")(); //xml文件的数据结构
   xmlData.SNetManSwitchConfig.SwitchList.Switch = xmlData.SNetManSwitchConfig.SwitchList.Switch.slice(
     1
   ); //删除数据结构中第一个示例模板
+  let data = {};
 
   for (let i = 0; i < excelData.length; i++) {
     let xmlObj = require("./XMLDateStructure")().SNetManSwitchConfig.SwitchList
       .Switch[0]; //xml的数据结构，（obj是引用类型）
-    let data = {};
 
     if (excelData[i].Ip === undefined) {
       data.errMsg = `ip不能为空,为空Ip应该在第 ${i + 2} 行,请仔细检查`;
@@ -25,16 +25,18 @@ module.exports = excelData => {
     }
 
     if (excelData[i].ReadCommunity === undefined) {
-      data.errMsg = `ReadCommunity不能为空,为空ReadCommunity应该在第 ${i +
-        2} 行,请仔细检查`;
+      data.errMsg = `ReadCommunity不能为空,为空ReadCommunity应该在第 ${
+        i + 2
+      } 行,请仔细检查`;
       return data;
     } else {
       xmlObj.BaseInfo.ReadCommunity = excelData[i].ReadCommunity;
     }
 
     if (excelData[i].WriteCommunity === undefined) {
-      data.errMsg = `WriteCommunity不能为空,为空WriteCommunity应该在第 ${i +
-        2} 行,请仔细检查`;
+      data.errMsg = `WriteCommunity不能为空,为空WriteCommunity应该在第 ${
+        i + 2
+      } 行,请仔细检查`;
       return data;
     } else {
       xmlObj.BaseInfo.WriteCommunity = excelData[i].WriteCommunity;
@@ -59,10 +61,10 @@ module.exports = excelData => {
   let xml = builder.buildObject(xmlData); //生成xml结构
   let xmlFilePath = "./plugin/switch/temp/SwitchService.xml"; //xml文件地址
 
-  fs.writeFile(xmlFilePath, xml, err => {
+  fs.writeFile(xmlFilePath, xml, (err) => {
     if (err) throw err;
     console.log("xml文件生成完毕");
   });
-  data.xmlFilePath = `http://localhost:3322/api/download/switch/temp/SwitchService.xml`;
+  data.xmlFilePath = `http://192.168.1.172:3322/api/download/switch/temp/SwitchService.xml`;
   return data;
 };

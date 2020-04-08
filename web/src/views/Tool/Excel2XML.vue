@@ -29,7 +29,7 @@
           </div>
         </div>
         <div class="donwloadXml" v-if="model.XMLPath">
-          <el-link v-bind:href="model.XMLPath" type="primary">右键另存为下载XML</el-link>
+          <el-link v-bind:href="model.XMLPath.xmlFilePath" type="primary">右键另存为下载XML</el-link>
         </div>
       </el-tab-pane>
     </el-tabs>
