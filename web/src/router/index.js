@@ -9,8 +9,8 @@ import softWareView from "../views/softWare/softWareView";
 import userCreate from "../views/User/UserCreate";
 import userList from "../views/User/UserList";
 
-import projectCreate from "../views/Project/ProjectCreate";
-import projectList from "../views/Project/ProjectList";
+import tagCreate from "../views/tag/tagCreate";
+import tagList from "../views/tag/tagList";
 
 import Excel2XML from "../views/Tool/Excel2XML";
 import XML2Excel from "../views/Tool/XML2Excel";
@@ -67,20 +67,20 @@ const router = new VueRouter({
           component: softWareList,
         },
         {
-          path: "/project/create",
-          name: "projectCreate",
-          component: projectCreate,
+          path: "/tag/create",
+          name: "tagCreate",
+          component: tagCreate,
         },
         {
-          path: "/project/edit/:id",
-          name: "projectEdit",
-          component: projectCreate,
+          path: "/tag/edit/:id",
+          name: "tagEdit",
+          component: tagCreate,
           props: true,
         },
         {
-          path: "/project/list",
-          name: "projectList",
-          component: projectList,
+          path: "/tag/list",
+          name: "tagList",
+          component: tagList,
         },
         {
           path: "/user/create",

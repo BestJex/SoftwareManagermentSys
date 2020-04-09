@@ -31,14 +31,14 @@
             </el-menu-item-group>
           </el-submenu>
 
-          <el-submenu class="projectMan" index="2">
+          <el-submenu class="tagMan" index="2">
             <template slot="title">
-              <i class="el-icon-s-data"></i>项目管理
+              <i class="el-icon-s-data"></i>标签管理
             </template>
             <el-menu-item-group>
-              <template slot="title">项目</template>
-              <el-menu-item class="projectCreate" index="/project/create">创建项目</el-menu-item>
-              <el-menu-item index="/project/list">项目列表</el-menu-item>
+              <template slot="title">标签</template>
+              <el-menu-item class="tagCreate" index="/tag/create">创建标签</el-menu-item>
+              <el-menu-item index="/tag/list">项目标签</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
 

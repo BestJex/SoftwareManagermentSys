@@ -19,7 +19,7 @@ const Schema = new mongoose.Schema({
   relatedProject: [
     {
       type: mongoose.SchemaTypes.ObjectId,
-      ref: "Project",
+      ref: "Tag",
     },
   ],
   createTime: {

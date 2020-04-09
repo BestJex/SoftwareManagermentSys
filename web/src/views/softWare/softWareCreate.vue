@@ -18,17 +18,17 @@
           <el-option v-for="item in versionType" :key="item" :label="item" :value="item"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="关联项目" prop="relatedProject">
+      <el-form-item label="关联项目" prop="relatedTag">
         <el-select
-          value-key="model.relatedProject._id"
-          v-model="model.relatedProject"
+          value-key="model.relatedTag._id"
+          v-model="model.relatedTag"
           multiple
           placeholder="请选择"
         >
           <el-option
-            v-for="item in projectList"
+            v-for="item in tagList"
             :key="item._id"
-            :label="item.projectName"
+            :label="item.tagName"
             :value="item._id"
           ></el-option>
         </el-select>
@@ -74,7 +74,7 @@ export default {
     return {
       model: { fileName: "" },
       versionType: ["WebMc", "Mc", "An", "Ac"],
-      projectList: [],
+      tagList: [],
       fileData: { fileName: "" },
       rules: {
         versionNumber: [
@@ -86,7 +86,7 @@ export default {
             trigger: "blur"
           }
         ],
-        relatedProject: [
+        relatedTag: [
           {
             type: "array",
             required: true,
@@ -112,9 +112,9 @@ export default {
     VueEditor
   },
   methods: {
-    async fetchProject() {
-      const res = await restgetAll("project");
-      this.projectList = res.data;
+    async fetchTag() {
+      const res = await restgetAll("tag");
+      this.tagList = res.data;
     },
 
     async fetchEdit() {
@@ -123,14 +123,14 @@ export default {
       this.processTag();
     },
 
-    //后端传过来的数据包含了relatedProject的整条数据，这导致el-option组件展示错误（只接收arr，传过来的是arr+obj），所以用下面的函数处理数据，挑出id然后重新push回去。
+    //后端传过来的数据包含了relatedTag的整条数据，这导致el-option组件展示错误（只接收arr，传过来的是arr+obj），所以用下面的函数处理数据，挑出id然后重新push回去。
     processTag() {
-      console.log(this.model.relatedProject);
+      console.log(this.model.relatedTag);
       let tagArr = []; //
-      for (let i = 0; i < this.model.relatedProject.length; i++) {
-        tagArr.push(this.model.relatedProject[i]._id);
+      for (let i = 0; i < this.model.relatedTag.length; i++) {
+        tagArr.push(this.model.relatedTag[i]._id);
       }
-      this.model.relatedProject = tagArr;
+      this.model.relatedTag = tagArr;
     },
 
     async save(formName) {
@@ -165,17 +165,17 @@ export default {
         this.$confirm("必须输入版本号");
         return false;
       }
-      if (this.model.relatedProject == "") {
+      if (this.model.relatedTag == "") {
         this.$confirm("必须选择关联项目");
         return false;
       }
-      let reId = this.model.relatedProject[0];
+      let reId = this.model.relatedTag[0];
       if (this.id) {
-        reId = this.model.relatedProject[0]._id; //因为编辑对象传过来的是一个对象
+        reId = this.model.relatedTag[0]._id; //因为编辑对象传过来的是一个对象
       }
       console.log(`reID`, reId);
-      const getProjectName = await restgetOne("project", reId); //为了拼接文件名
-      return (this.fileData.fileName = `${this.model.versionType}_${this.model.versionNumber}_${getProjectName.data.projectName}_${file.name}`);
+      const getTagName = await restgetOne("tag", reId); //为了拼接文件名
+      return (this.fileData.fileName = `${this.model.versionType}_${this.model.versionNumber}_${getTagName.data.TagName}_${file.name}`);
     },
 
     removeFile() {
@@ -191,7 +191,7 @@ export default {
   },
   created() {
     this.id && this.fetchEdit();
-    this.fetchProject();
+    this.fetchTag();
   }
 };
 </script>

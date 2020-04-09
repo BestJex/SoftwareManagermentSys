@@ -2,16 +2,12 @@
   <div>
     <h1 class="title">项目列表:</h1>
     <el-table :data="items" border style="width: 100%">
-      <el-table-column prop="projectName" label="项目名称"></el-table-column>
-      <el-table-column prop="projectFeatures" label="项目简介"></el-table-column>
+      <el-table-column prop="tagName" label="项目名称"></el-table-column>
+      <el-table-column prop="tagFeatures" label="项目简介"></el-table-column>
       <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-button
-            @click="$router.push(`/project/edit/${scope.row._id}`)"
-            type="text"
-            size="small"
-          >编辑</el-button>
+          <el-button @click="$router.push(`/tag/edit/${scope.row._id}`)" type="text" size="small">编辑</el-button>
           <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
@@ -22,13 +18,13 @@
 <script>
 import { restgetAll, restDeleteOne } from "../../Api/api";
 export default {
-  name: "mcList",
+  name: "tagList",
   data() {
     return { items: [] };
   },
   methods: {
     async fetch() {
-      const data = await restgetAll("project");
+      const data = await restgetAll("tag");
       this.items = data.data;
       console.log(data);
     },
@@ -40,7 +36,7 @@ export default {
         cancelButtonText: "取消"
       }).then(async () => {
         console.log(row._id);
-        const data = await restDeleteOne("project", row._id);
+        const data = await restDeleteOne("tag", row._id);
         this.$notify({
           title: "成功",
           type: "success",
