@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 <template>
   <div name="createSoftWare" class="softWare">
-    <h1 name="title">{{ id ? "编辑" : "上传" }}版本:</h1>
+    <h1 name="title">{{ id ? "编辑" : "上传" }}软件:</h1>
     <el-form
       ref="model"
       :rules="rules"
@@ -126,7 +126,7 @@ export default {
     //后端传过来的数据包含了relatedTag的整条数据，这导致el-option组件展示错误（只接收arr，传过来的是arr+obj），所以用下面的函数处理数据，挑出id然后重新push回去。
     processTag() {
       console.log(this.model.relatedTag);
-      let tagArr = []; //
+      let tagArr = [];
       for (let i = 0; i < this.model.relatedTag.length; i++) {
         tagArr.push(this.model.relatedTag[i]._id);
       }

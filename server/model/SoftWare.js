@@ -16,7 +16,7 @@ const Schema = new mongoose.Schema({
   versionFeatures: {
     type: String,
   },
-  relatedProject: [
+  relatedTag: [
     {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Tag",
