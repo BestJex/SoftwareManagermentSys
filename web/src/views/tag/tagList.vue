@@ -2,8 +2,8 @@
   <div>
     <h1 class="title">项目列表:</h1>
     <el-table :data="items" border style="width: 100%">
-      <el-table-column prop="tagName" label="项目名称"></el-table-column>
-      <el-table-column prop="tagFeatures" label="项目简介"></el-table-column>
+      <el-table-column prop="tagName" label="标签名称"></el-table-column>
+      <el-table-column prop="tagFeatures" label="标签简介"></el-table-column>
       <el-table-column fixed="right" label="操作" width="120">
         <template slot-scope="scope">
           <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
