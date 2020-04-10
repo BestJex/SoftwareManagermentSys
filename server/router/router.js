@@ -66,4 +66,6 @@ module.exports = (app) => {
   require("../plugin/switch/switch")(app);
   //根据博客的标签去查找带有同样标签的博客
   require("../plugin/findBlogTag")(app);
+  //搜索
+  require("../plugin/search")(app);
 };
