@@ -18,6 +18,11 @@ export default {
   },
   methods: {
     search() {
+      if (this.input == "") {
+        //如果用户啥也没输，就输入一个空格 我再那边做了判断，如果是空格，就获取全部软件。
+        this.input = " ";
+        this.$router.push(`/softWare/search/${this.input}`);
+      }
       this.$router.push(`/softWare/search/${this.input}`);
     },
   },
