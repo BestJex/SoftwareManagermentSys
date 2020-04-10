@@ -2,12 +2,22 @@
   <div>
     <h1>软件列表:</h1>
     <el-table
-      :data="tableProps.slice((currentPage-1)*pagesize,currentPage*pagesize)"
-      :default-sort="{prop: 'items', order: 'descending'}"
+      :data="
+        tableProps.slice((currentPage - 1) * pagesize, currentPage * pagesize)
+      "
+      :default-sort="{ prop: 'items', order: 'descending' }"
       style="width: 100%"
     >
-      <el-table-column sortable prop="createTime" label="创建时间"></el-table-column>
-      <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
+      <el-table-column
+        sortable
+        prop="createTime"
+        label="创建时间"
+      ></el-table-column>
+      <el-table-column
+        sortable
+        prop="versionNumber"
+        label="版本号"
+      ></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <template slot="header" slot-scope="scope">
           <el-input
@@ -23,13 +33,17 @@
             @click="$router.push(`/softWare/view/${scope.row._id}`)"
             type="text"
             size="small"
-          >查看</el-button>
+            >查看</el-button
+          >
           <el-button
             @click="$router.push(`/softWare/edit/${scope.row._id}`)"
             type="text"
             size="small"
-          >编辑</el-button>
-          <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
+            >编辑</el-button
+          >
+          <el-button @click="remove(scope.row)" type="text" size="small"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
@@ -46,17 +60,23 @@
 </template>
 
 <script>
-import { restgetAll, restDeleteOne, deleteFile } from "../../Api/api";
+import {
+  restgetAll,
+  restDeleteOne,
+  deleteFile,
+  getBlogTag,
+  searchSoftWare,
+} from "../../Api/api";
 export default {
   name: "softWareList",
-  props: { id: {} },
+  props: { id: {}, searchInput: {} },
   data() {
     return {
       items: [],
       search: "",
       tableProps: [],
       currentPage: 1, //当前页
-      pagesize: 10 //    每页的数据
+      pagesize: 10, //    每页的数据
     };
   },
   methods: {
@@ -65,7 +85,7 @@ export default {
       console.log(this.pagesize); //每页下拉显示数据
     },
     async findblogTag() {
-      const res = await this.$http.get(`/findBlogTag/${this.id}`);
+      const res = await getBlogTag();
       this.items = res.data;
       this.tableProps = this.items;
     },
@@ -79,12 +99,19 @@ export default {
       const data = await restgetAll("softWare");
       this.items = data.data;
       this.tableProps = this.items;
-      console.log(data);
     },
 
+    //当从首页执行搜索
+    async Search() {
+      const res = await searchSoftWare(this.searchInput);
+      this.items = res.data;
+      this.tableProps = res.data;
+    },
+
+    //表格内的搜索--过滤前端数组
     SearchTable() {
       let data = this.items.filter(
-        data =>
+        (data) =>
           !this.search ||
           data.versionNumber.toLowerCase().includes(this.search.toLowerCase())
       );
@@ -98,7 +125,7 @@ export default {
         {
           distinguishCancelAndClose: true,
           confirmButtonText: "确定",
-          cancelButtonText: "取消"
+          cancelButtonText: "取消",
         }
       )
         .then(async () => {
@@ -111,19 +138,24 @@ export default {
           this.$notify({
             title: "成功",
             type: "success",
-            message: "删除成功"
+            message: "删除成功",
           });
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(`删除错误`, err);
         });
-    }
+    },
   },
   created() {
-    this.id ? this.findblogTag() : this.fetch();
-  }
+    if (this.id) {
+      this.findblogTag();
+    } else if (this.searchInput) {
+      this.Search();
+    } else {
+      this.fetch();
+    }
+  },
 };
 </script>
 
-<style>
-</style>
+<style></style>

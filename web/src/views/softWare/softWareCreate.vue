@@ -38,8 +38,19 @@
       </el-form-item>
       <el-form-item label="上传软件">
         <el-row v-if="model.fileName">
-          <el-link class="fileLink" v-bind:href="model.fileDir" target="_blank">{{ model.fileName }}</el-link>
-          <el-button size="mini" @click="removeFile" type="danger" icon="el-icon-delete" circle></el-button>
+          <el-link
+            class="fileLink"
+            v-bind:href="model.fileDir"
+            target="_blank"
+            >{{ model.fileName }}</el-link
+          >
+          <el-button
+            size="mini"
+            @click="removeFile"
+            type="danger"
+            icon="el-icon-delete"
+            circle
+          ></el-button>
         </el-row>
         <div v-if="!model.fileName">
           <el-upload
@@ -50,12 +61,16 @@
             :data="fileData"
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">格式不限，但是不超过100M</div>
+            <div slot="tip" class="el-upload__tip">
+              格式不限，但是不超过100M
+            </div>
           </el-upload>
         </div>
       </el-form-item>
       <el-form-item style="margin-top: 1rem;">
-        <el-button type="primary" class="save" native-type="subumit">保存</el-button>
+        <el-button type="primary" class="save" native-type="subumit"
+          >保存</el-button
+        >
       </el-form-item>
     </el-form>
   </div>
@@ -68,7 +83,7 @@ import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "SoftWareCreate",
   props: {
-    id: {}
+    id: {},
   },
   data() {
     return {
@@ -82,25 +97,25 @@ export default {
             min: 3,
             max: 15,
             message: "长度在 3 到 15 个字符",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         relatedTag: [
           {
             type: "array",
             required: true,
             message: "请选择关联项目",
-            trigger: "blur"
-          }
+            trigger: "blur",
+          },
         ],
         versionFeatures: [
-          { required: true, message: "请输入版本特性", trigger: "blur" }
-        ]
-      }
+          { required: true, message: "请输入版本特性", trigger: "blur" },
+        ],
+      },
     };
   },
   components: {
-    VueEditor
+    VueEditor,
   },
   methods: {
     async fetchTag() {
@@ -111,6 +126,7 @@ export default {
     async fetchEdit() {
       const data = await restgetOne("softWare", this.id);
       this.model = data.data;
+      console.log(this.model);
       this.processTag();
     },
 
@@ -137,7 +153,7 @@ export default {
       this.$notify({
         title: "成功",
         type: "success",
-        message: "保存成功"
+        message: "保存成功",
       });
     },
 
@@ -162,11 +178,11 @@ export default {
       }
       let reId = this.model.relatedTag[0];
       if (this.id) {
-        reId = this.model.relatedTag[0]._id; //因为编辑对象传过来的是一个对象
+        reId = this.model.relatedTag[0]; //因为编辑对象传过来的是一个对象
       }
       console.log(`reID`, reId);
       const getTagName = await restgetOne("tag", reId); //为了拼接文件名
-      return (this.fileData.fileName = `${this.model.versionNumber}_${getTagName.data.TagName}_${file.name}`);
+      return (this.fileData.fileName = `${this.model.versionNumber}_${file.name}`);
     },
 
     removeFile() {
@@ -175,15 +191,15 @@ export default {
           const res = await deleteFile(this.model.fileName);
           this.model.fileName = "";
         })
-        .catch(err => {
+        .catch((err) => {
           console.log(`删除文件错误：`, err);
         });
-    }
+    },
   },
   created() {
     this.id && this.fetchEdit();
     this.fetchTag();
-  }
+  },
 };
 </script>
 

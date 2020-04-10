@@ -39,6 +39,17 @@ let getTemplate = async () => {
   return await http.get("/download/switch/excel2xmlTemplate.xlsx");
 };
 
+//标签
+
+let getBlogTag = async () => {
+  return await http.get(`/findBlogTag/${this.id}`);
+};
+
+//search
+let searchSoftWare = async (searchInput) => {
+  return await http.get(`/search/${searchInput}`);
+};
+
 export {
   getCodeSrc,
   userLogin,
@@ -49,4 +60,6 @@ export {
   restDeleteOne,
   deleteFile,
   getTemplate,
+  getBlogTag,
+  searchSoftWare,
 };

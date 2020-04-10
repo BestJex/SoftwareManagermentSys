@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <el-header style>
-      <h1 id="title">{{title}}</h1>
+      <h1 id="title">{{ title }}</h1>
       <el-dropdown @command="handleCommand">
         <i class="el-icon-setting" style="margin-right: 15px;color:#FFFFFF"></i>
         <el-dropdown-menu slot="dropdown">
@@ -9,12 +9,17 @@
           <el-dropdown-item command="logOut">注销</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
-      <span>欢迎您 {{this.userName}}</span>
+      <span>欢迎您 {{ this.userName }}</span>
     </el-header>
 
     <el-container style="height: 100vh">
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu open="[1]" router :default-active="$router.path" :collapse="false">
+        <el-menu
+          open="[1]"
+          router
+          :default-active="$router.path"
+          :collapse="false"
+        >
           <el-menu-item index="/home">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
@@ -37,7 +42,9 @@
             </template>
             <el-menu-item-group>
               <template slot="title">标签</template>
-              <el-menu-item class="tagCreate" index="/tag/create">创建标签</el-menu-item>
+              <el-menu-item class="tagCreate" index="/tag/create"
+                >创建标签</el-menu-item
+              >
               <el-menu-item index="/tag/list">项目标签</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
@@ -48,7 +55,9 @@
             </template>
             <el-menu-item-group>
               <template slot="title">用户</template>
-              <el-menu-item class="userCreate" index="/user/create">创建用户</el-menu-item>
+              <el-menu-item class="userCreate" index="/user/create"
+                >创建用户</el-menu-item
+              >
               <el-menu-item index="/user/list">用户列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
@@ -58,8 +67,12 @@
             </template>
             <el-menu-item-group>
               <template slot="title">交换机</template>
-              <el-menu-item class="excel2xml" index="/tool/excel2xml">Excel2XML</el-menu-item>
-              <el-menu-item class="xml2excel" index="/tool/xml2excel">XML2Excel</el-menu-item>
+              <el-menu-item class="excel2xml" index="/tool/excel2xml"
+                >Excel2XML</el-menu-item
+              >
+              <el-menu-item class="xml2excel" index="/tool/xml2excel"
+                >XML2Excel</el-menu-item
+              >
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -81,7 +94,7 @@ export default {
     return {
       userName: "",
       title: process.env.VUE_APP_TITLE || "anyTitle",
-      isCollapse: true
+      isCollapse: true,
     };
   },
   methods: {
@@ -95,14 +108,14 @@ export default {
         this.$router.push("/login");
         this.$message({
           type: "success",
-          message: "退出登录成功"
+          message: "退出登录成功",
         });
       }
-    }
+    },
   },
   created() {
     this.getUser();
-  }
+  },
 };
 </script>
 <style>

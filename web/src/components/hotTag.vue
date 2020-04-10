@@ -5,9 +5,10 @@
       v-for="item in model"
       :key="item._id"
       :disable-transitions="false"
-      v-on:click="$router.push(`/softWare/list/${item._id}`)"
+      v-on:click="$router.push(`/softWare/findTag/${item._id}`)"
       type="info"
-    >{{ item.tagName }}</el-tag>
+      >{{ item.tagName }}</el-tag
+    >
   </div>
 </template>
 
@@ -17,7 +18,7 @@ export default {
   name: "hotTag",
   data() {
     return {
-      model: {}
+      model: {},
     };
   },
   methods: {
@@ -26,11 +27,11 @@ export default {
       this.model = res.data;
     },
 
-    async tagClick(key) {}
+    async tagClick(key) {},
   },
   created() {
     this.getTag();
-  }
+  },
 };
 </script>
 

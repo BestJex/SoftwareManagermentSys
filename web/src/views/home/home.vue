@@ -9,7 +9,8 @@
         </el-col>
         <el-col :span="8">
           <el-card shadow="hover" class="box-card quicklyDownLoad">
-            <div>快速下载</div>
+            <div>全局搜索</div>
+            <search></search>
           </el-card>
         </el-col>
         <el-col :span="8">
@@ -31,14 +32,17 @@
 
 <script>
 import hotTag from "../../components/hotTag";
+import search from "@/components/search";
+
 export default {
   name: "home",
   data() {
     return {};
   },
   components: {
-    hotTag
-  }
+    hotTag,
+    search,
+  },
 };
 </script>
 
