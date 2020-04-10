@@ -18,7 +18,7 @@ module.exports = (app) => {
   });
 
   router.get("/", async (req, res) => {
-    const item = await req.Model.find();
+    const item = await req.Model.find().populate("relatedTag");
     console.log(`获取 ${req.params.resource}列表`);
     res.send(item);
   });

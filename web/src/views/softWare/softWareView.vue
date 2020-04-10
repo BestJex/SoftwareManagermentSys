@@ -10,10 +10,10 @@
           相关项目:
           <el-tag
             class="tag"
-            v-for="item in model.relatedProject"
+            v-for="item in model.relatedTag"
             :key="item._id"
             size="small"
-          >{{item.projectName}}</el-tag>
+          >{{item.tagName}}</el-tag>
         </div>
         <div class="versionItem">
           下载项目:

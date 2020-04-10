@@ -11,14 +11,14 @@
       class="sendItem"
     >
       <el-form-item label="版本号" prop="versionNumber">
-        <el-input id="versionNum" maxlength="16" v-model="model.versionNumber"></el-input>
+        <el-input
+          id="versionNum"
+          maxlength="16"
+          v-model="model.versionNumber"
+          placeholder="命名规则: 版本类型 版本号 主要特性;例如mc 1346 无key版"
+        ></el-input>
       </el-form-item>
-      <el-form-item label="版本类型" prop="versionType">
-        <el-select value-key="model.versionType" v-model="model.versionType" placeholder="请选择">
-          <el-option v-for="item in versionType" :key="item" :label="item" :value="item"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item label="关联项目" prop="relatedTag">
+      <el-form-item label="添加标签" prop="relatedTag">
         <el-select
           value-key="model.relatedTag._id"
           v-model="model.relatedTag"
@@ -73,7 +73,6 @@ export default {
   data() {
     return {
       model: { fileName: "" },
-      versionType: ["WebMc", "Mc", "An", "Ac"],
       tagList: [],
       fileData: { fileName: "" },
       rules: {
@@ -91,14 +90,6 @@ export default {
             type: "array",
             required: true,
             message: "请选择关联项目",
-            trigger: "blur"
-          }
-        ],
-        versionType: [
-          {
-            type: "string",
-            required: true,
-            message: "请选择版本类型",
             trigger: "blur"
           }
         ],
@@ -175,7 +166,7 @@ export default {
       }
       console.log(`reID`, reId);
       const getTagName = await restgetOne("tag", reId); //为了拼接文件名
-      return (this.fileData.fileName = `${this.model.versionType}_${this.model.versionNumber}_${getTagName.data.TagName}_${file.name}`);
+      return (this.fileData.fileName = `${this.model.versionNumber}_${getTagName.data.TagName}_${file.name}`);
     },
 
     removeFile() {

@@ -8,7 +8,6 @@
     >
       <el-table-column sortable prop="createTime" label="创建时间"></el-table-column>
       <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
-      <el-table-column sortable prop="versionType" label="版本类型"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <template slot="header" slot-scope="scope">
           <el-input

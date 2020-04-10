@@ -10,9 +10,6 @@ const Schema = new mongoose.Schema({
   fileName: {
     type: String,
   },
-  versionType: {
-    type: String,
-  },
   versionFeatures: {
     type: String,
   },
