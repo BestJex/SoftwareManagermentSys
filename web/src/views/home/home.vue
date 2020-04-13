@@ -9,13 +9,13 @@
         </el-col>
         <el-col :span="8">
           <el-card shadow="hover" class="box-card quicklyDownLoad">
-            <div>全局搜索</div>
-            <search></search>
+            快速下载
           </el-card>
         </el-col>
         <el-col :span="8">
           <el-card shadow="hover" class="box-card hotTag">
-            <hotTag></hotTag>
+            <search></search>
+            <hotTag class="hotTagDiv"></hotTag>
           </el-card>
         </el-col>
       </el-row>
@@ -47,6 +47,12 @@ export default {
 </script>
 
 <style scoped>
+.hotTagDiv {
+  /*微调了间距，看起来更美观 */
+  margin-top: 45px;
+  /* border: 1px solid red; */
+}
+
 .home {
   height: 90vh;
   min-height: 520px;

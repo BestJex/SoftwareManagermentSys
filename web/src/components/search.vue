@@ -1,11 +1,12 @@
 <template>
   <div class="search">
-    <el-input
-      class="searchInput"
-      v-model="input"
-      placeholder="请输入搜索内容"
+    <el-input class="searchInput" v-model="input" placeholder="请输入版本号搜索"
+      ><el-button
+        slot="append"
+        icon="el-icon-search"
+        @click="search"
+      ></el-button
     ></el-input>
-    <el-button @click="search">搜索</el-button>
   </div>
 </template>
 
@@ -29,10 +30,11 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .searchInput {
+  border-radius: 5px;
   float: left;
-  width: 60%;
+  width: 100%;
 }
 
 .searchButton {

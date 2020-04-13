@@ -149,7 +149,7 @@ export default {
   created() {
     if (this.id) {
       this.findblogTag();
-    } else if (this.searchInput !== " ") {
+    } else if (this.searchInput && this.searchInput !== " ") {
       this.Search();
     } else {
       this.fetch();
