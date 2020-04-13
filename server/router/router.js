@@ -68,4 +68,6 @@ module.exports = (app) => {
   require("../plugin/findBlogTag")(app);
   //搜索
   require("../plugin/search")(app);
+  //热门下载
+  require("../plugin/softWareInfo")(app);
 };

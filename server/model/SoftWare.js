@@ -33,4 +33,4 @@ const Schema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("Mc", Schema);
+module.exports = mongoose.model("SoftWare", Schema);
