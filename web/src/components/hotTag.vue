@@ -4,7 +4,7 @@
       class="hotTag"
       v-for="item in model"
       :key="item._id"
-      :disable-transitions="false"
+      :disable-transitions="true"
       v-on:click="$router.push(`/softWare/findTag/${item._id}`)"
       type="info"
       >{{ item.tagName }}</el-tag

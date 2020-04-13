@@ -18,13 +18,13 @@ module.exports = (app) => {
   });
 
   router.get("/", async (req, res) => {
-    const item = await req.Model.find().populate("relatedTag");
+    const item = await req.Model.find().populate("parent");
     console.log(`获取 ${req.params.resource}列表`);
     res.send(item);
   });
 
   router.get("/:id", async (req, res) => {
-    const item = await req.Model.findById(req.params.id).populate("relatedTag");
+    const item = await req.Model.findById(req.params.id).populate("parent");
     console.log(`查找 ${req.params.id}`);
     console.log(item);
     res.send(item);

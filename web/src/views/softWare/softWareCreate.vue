@@ -18,10 +18,10 @@
           placeholder="命名规则: 版本类型 版本号 主要特性;例如mc 1346 无key版"
         ></el-input>
       </el-form-item>
-      <el-form-item label="添加标签" prop="relatedTag">
+      <el-form-item label="添加标签" prop="parent">
         <el-select
-          value-key="model.relatedTag._id"
-          v-model="model.relatedTag"
+          value-key="model.parent._id"
+          v-model="model.parent"
           multiple
           placeholder="请选择"
         >
@@ -41,6 +41,7 @@
           <el-link
             class="fileLink"
             v-bind:href="model.fileDir"
+            @click.native="count"
             target="_blank"
             >{{ model.fileName }}</el-link
           >
@@ -78,7 +79,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import { restgetAll, restgetOne } from "../../Api/api";
+import { restgetAll, restgetOne, hotDownload } from "../../Api/api";
 import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "SoftWareCreate",
@@ -100,7 +101,7 @@ export default {
             trigger: "blur",
           },
         ],
-        relatedTag: [
+        parent: [
           {
             type: "array",
             required: true,
@@ -130,14 +131,14 @@ export default {
       this.processTag();
     },
 
-    //后端传过来的数据包含了relatedTag的整条数据，这导致el-option组件展示错误（只接收arr，传过来的是arr+obj），所以用下面的函数处理数据，挑出id然后重新push回去。
+    //后端传过来的数据包含了parent的整条数据，这导致el-option组件展示错误（只接收arr，传过来的是arr+obj），所以用下面的函数处理数据，挑出id然后重新push回去。
     processTag() {
-      console.log(this.model.relatedTag);
+      console.log(this.model.parent);
       let tagArr = [];
-      for (let i = 0; i < this.model.relatedTag.length; i++) {
-        tagArr.push(this.model.relatedTag[i]._id);
+      for (let i = 0; i < this.model.parent.length; i++) {
+        tagArr.push(this.model.parent[i]._id);
       }
-      this.model.relatedTag = tagArr;
+      this.model.parent = tagArr;
     },
 
     async save(formName) {
@@ -172,13 +173,13 @@ export default {
         this.$confirm("必须输入版本号");
         return false;
       }
-      if (this.model.relatedTag == "") {
+      if (this.model.parent == "") {
         this.$confirm("必须选择关联项目");
         return false;
       }
-      let reId = this.model.relatedTag[0];
+      let reId = this.model.parent[0];
       if (this.id) {
-        reId = this.model.relatedTag[0]; //因为编辑对象传过来的是一个对象
+        reId = this.model.parent[0]; //因为编辑对象传过来的是一个对象
       }
       console.log(`reID`, reId);
       const getTagName = await restgetOne("tag", reId); //为了拼接文件名
@@ -194,6 +195,9 @@ export default {
         .catch((err) => {
           console.log(`删除文件错误：`, err);
         });
+    },
+    async count() {
+      await hotDownload(this.model._id);
     },
   },
   created() {

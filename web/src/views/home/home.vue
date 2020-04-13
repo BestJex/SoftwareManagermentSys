@@ -9,7 +9,7 @@
         </el-col>
         <el-col :span="8">
           <el-card shadow="hover" class="box-card quicklyDownLoad">
-            快速下载
+            热门下载 <topDownload></topDownload>
           </el-card>
         </el-col>
         <el-col :span="8">
@@ -33,6 +33,7 @@
 <script>
 import hotTag from "../../components/hotTag";
 import search from "@/components/search";
+import topDownload from "@/components/topDownload";
 
 export default {
   name: "home",
@@ -42,6 +43,7 @@ export default {
   components: {
     hotTag,
     search,
+    topDownload,
   },
 };
 </script>

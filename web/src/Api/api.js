@@ -49,6 +49,11 @@ let searchSoftWare = async (searchInput) => {
   return await http.get(`/search/${searchInput}`);
 };
 
+//热门下载
+let hotDownload = async (id) => {
+  return await http.post(`/softWareInfo/${id}`);
+};
+
 export {
   getCodeSrc,
   userLogin,
@@ -61,4 +66,5 @@ export {
   getTemplate,
   getBlogTag,
   searchSoftWare,
+  hotDownload,
 };

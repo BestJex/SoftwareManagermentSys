@@ -13,7 +13,7 @@ const Schema = new mongoose.Schema({
   versionFeatures: {
     type: String,
   },
-  relatedTag: [
+  parent: [
     {
       type: mongoose.SchemaTypes.ObjectId,
       ref: "Tag",

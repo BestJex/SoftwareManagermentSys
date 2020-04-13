@@ -3,8 +3,8 @@ module.exports = (app) => {
   const SoftWare = require("../model/SoftWare");
   app.get("/api/findBlogTag/:id", async (req, res) => {
     const data = await SoftWare.find({
-      relatedTag: req.params.id,
-    }).populate("relatedTag");
+      parent: req.params.id,
+    }).populate("parent");
     res.send(data);
   });
 };
