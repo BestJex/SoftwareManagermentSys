@@ -85,7 +85,7 @@ export default {
       console.log(this.pagesize); //每页下拉显示数据
     },
     async findblogTag() {
-      const res = await getBlogTag();
+      const res = await getBlogTag(this.id);
       this.items = res.data;
       this.tableProps = this.items;
     },

@@ -40,9 +40,8 @@ let getTemplate = async () => {
 };
 
 //标签
-
-let getBlogTag = async () => {
-  return await http.get(`/findBlogTag/${this.id}`);
+let getBlogTag = async (id) => {
+  return await http.get(`/findBlogTag/${id}`);
 };
 
 //search
