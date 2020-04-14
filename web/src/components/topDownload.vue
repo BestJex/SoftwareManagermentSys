@@ -15,16 +15,9 @@
           target="_blank"
           >{{ item.parent.versionNumber }}</el-link
         >
-        <el-tooltip
-          class="item"
-          effect="light"
-          content="下载次数"
-          placement="top-start"
+        <el-link class="downloads" :underline="false" target="_blank"
+          >{{ item.downloads }}次</el-link
         >
-          <el-link class="downloads" :underline="false" target="_blank">{{
-            item.downloads
-          }}</el-link>
-        </el-tooltip>
       </el-col>
     </el-row>
   </div>
