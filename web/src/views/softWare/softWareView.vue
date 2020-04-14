@@ -18,9 +18,12 @@
         </div>
         <div class="versionItem">
           下载项目:
-          <el-link v-bind:href="model.fileDir" type="info">{{
-            model.fileName
-          }}</el-link>
+          <el-link
+            @click.native="count(model._id)"
+            v-bind:href="model.fileDir"
+            type="info"
+            >{{ model.fileName }}</el-link
+          >
         </div>
       </el-tab-pane>
       <el-tab-pane label="版本信息">
@@ -32,7 +35,7 @@
 </template>
 
 <script>
-import { restgetOne } from "../../Api/api";
+import { restgetOne, downloadInfo } from "../../Api/api";
 export default {
   name: "softWareView",
   props: {
@@ -48,6 +51,13 @@ export default {
       const data = await restgetOne("softWare", this.id);
       this.model = data.data;
       console.log(this.model);
+    },
+    async count(id) {
+      try {
+        await downloadInfo(id);
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   created() {
