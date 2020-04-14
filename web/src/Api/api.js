@@ -50,8 +50,12 @@ let searchSoftWare = async (searchInput) => {
 };
 
 //热门下载
-let hotDownload = async (id) => {
+let downloadInfo = async (id) => {
   return await http.post(`/softWareInfo/${id}`);
+};
+
+let deleteDownloadInfo = async (id) => {
+  return await http.delete(`/softWareInfo/${id}`);
 };
 
 export {
@@ -66,5 +70,6 @@ export {
   getTemplate,
   getBlogTag,
   searchSoftWare,
-  hotDownload,
+  downloadInfo,
+  deleteDownloadInfo,
 };

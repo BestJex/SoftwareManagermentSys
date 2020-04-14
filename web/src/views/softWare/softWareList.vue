@@ -66,6 +66,7 @@ import {
   deleteFile,
   getBlogTag,
   searchSoftWare,
+  deleteDownloadInfo,
 } from "../../Api/api";
 export default {
   name: "softWareList",
@@ -129,6 +130,7 @@ export default {
         }
       )
         .then(async () => {
+          await deleteDownloadInfo(row._id); //删除对应软件的下载信息
           await restDeleteOne("softWare", row._id);
           if (!row.fileName == " " || !row.fileName == undefined) {
             //如果根本上传文件，就不用去后台删除文件了。

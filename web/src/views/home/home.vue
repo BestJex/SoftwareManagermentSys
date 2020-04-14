@@ -9,7 +9,7 @@
         </el-col>
         <el-col :span="8">
           <el-card shadow="hover" class="box-card quicklyDownLoad">
-            热门下载 <topDownload></topDownload>
+            <topDownload></topDownload>
           </el-card>
         </el-col>
         <el-col :span="8">

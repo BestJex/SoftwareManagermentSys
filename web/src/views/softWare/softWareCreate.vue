@@ -79,7 +79,7 @@
 
 <script>
 import { VueEditor } from "vue2-editor";
-import { restgetAll, restgetOne, hotDownload } from "../../Api/api";
+import { restgetAll, restgetOne, downloadInfo } from "../../Api/api";
 import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "SoftWareCreate",
@@ -197,7 +197,7 @@ export default {
         });
     },
     async count() {
-      await hotDownload(this.model._id);
+      await downloadInfo(this.model._id);
     },
   },
   created() {
