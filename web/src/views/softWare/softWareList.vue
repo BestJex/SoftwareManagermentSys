@@ -8,16 +8,8 @@
       :default-sort="{ prop: 'items', order: 'descending' }"
       style="width: 100%"
     >
-      <el-table-column
-        sortable
-        prop="createTime"
-        label="创建时间"
-      ></el-table-column>
-      <el-table-column
-        sortable
-        prop="versionNumber"
-        label="版本号"
-      ></el-table-column>
+      <el-table-column sortable prop="createTime" label="创建时间"></el-table-column>
+      <el-table-column sortable prop="versionNumber" label="版本号"></el-table-column>
       <el-table-column fixed="right" label="操作" width="300">
         <template slot="header" slot-scope="scope">
           <el-input
@@ -33,17 +25,13 @@
             @click="$router.push(`/softWare/view/${scope.row._id}`)"
             type="text"
             size="small"
-            >查看</el-button
-          >
+          >查看</el-button>
           <el-button
             @click="$router.push(`/softWare/edit/${scope.row._id}`)"
             type="text"
             size="small"
-            >编辑</el-button
-          >
-          <el-button @click="remove(scope.row)" type="text" size="small"
-            >删除</el-button
-          >
+          >编辑</el-button>
+          <el-button @click="remove(scope.row)" type="text" size="small">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -53,11 +41,12 @@
       :current-page="currentPage"
       :page-sizes="[5, 10, 20, 40]"
       :page-size="pagesize"
-      layout="total, prev, next, jumper"
+      layout="total, prev, next, pager,jumper "
       :total="items.length"
     ></el-pagination>
   </div>
 </template>
+
 
 <script>
 import {
@@ -66,7 +55,7 @@ import {
   deleteFile,
   getBlogTag,
   searchSoftWare,
-  deleteDownloadInfo,
+  deleteDownloadInfo
 } from "../../Api/api";
 export default {
   name: "softWareList",
@@ -77,7 +66,7 @@ export default {
       search: "",
       tableProps: [],
       currentPage: 1, //当前页
-      pagesize: 10, //    每页的数据
+      pagesize: 10 //    每页的数据
     };
   },
   methods: {
@@ -112,7 +101,7 @@ export default {
     //表格内的搜索--过滤前端数组
     SearchTable() {
       let data = this.items.filter(
-        (data) =>
+        data =>
           !this.search ||
           data.versionNumber.toLowerCase().includes(this.search.toLowerCase())
       );
@@ -126,7 +115,7 @@ export default {
         {
           distinguishCancelAndClose: true,
           confirmButtonText: "确定",
-          cancelButtonText: "取消",
+          cancelButtonText: "取消"
         }
       )
         .then(async () => {
@@ -140,13 +129,13 @@ export default {
           this.$notify({
             title: "成功",
             type: "success",
-            message: "删除成功",
+            message: "删除成功"
           });
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(`删除错误`, err);
         });
-    },
+    }
   },
   created() {
     if (this.id) {
@@ -156,7 +145,7 @@ export default {
     } else {
       this.fetch();
     }
-  },
+  }
 };
 </script>
 
