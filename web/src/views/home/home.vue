@@ -9,6 +9,7 @@
         </el-col>
         <el-col :span="8">
           <el-card shadow="hover" class="box-card quicklyDownLoad">
+            <span class="hotDownLoadIcon"></span>
             <topDownload></topDownload>
           </el-card>
         </el-col>
@@ -43,8 +44,8 @@ export default {
   components: {
     hotTag,
     search,
-    topDownload,
-  },
+    topDownload
+  }
 };
 </script>
 
@@ -67,6 +68,7 @@ export default {
 }
 
 .quicklyDownLoad {
+  position: relative;
   height: 37vh;
   margin-right: 10px;
 }
@@ -77,5 +79,17 @@ export default {
 .echarts {
   height: 46vh;
   margin-top: 10px;
+}
+
+.hotDownLoadIcon {
+  width: 40px;
+  height: 40px;
+  color: red;
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  /* border: 1px solid red; */
+  background: url("../../assets/hot.svg") no-repeat;
+  background-size: 115%;
 }
 </style>

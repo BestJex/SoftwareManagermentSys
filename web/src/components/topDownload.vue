@@ -1,23 +1,15 @@
 <template>
   <div class="topDownload">
     <el-row>
-      <el-col
-        class="hotEl"
-        v-for="item in model.slice(0, 10)"
-        :key="item._id"
-        :span="24"
-      >
+      <el-col class="hotEl" v-for="item in model.slice(0, 10)" :key="item._id" :span="24">
         <el-link
           icon="el-icon-download"
           :underline="false"
           @click.native="count(item.parent._id)"
           v-bind:href="item.parent.fileDir"
           target="_blank"
-          >{{ item.parent.versionNumber }}</el-link
-        >
-        <el-link class="downloads" :underline="false" target="_blank"
-          >{{ item.downloads }}次</el-link
-        >
+        >{{ item.parent.versionNumber }}</el-link>
+        <el-link class="downloads" :underline="false" target="_blank">{{ item.downloads }}次</el-link>
       </el-col>
     </el-row>
   </div>
@@ -29,7 +21,7 @@ export default {
   name: "topDownload",
   data() {
     return {
-      model: [],
+      model: []
     };
   },
   methods: {
@@ -62,15 +54,15 @@ export default {
         }
       }
       return arr;
-    },
+    }
   },
   created() {
     this.getAllDownloadInfo();
-  },
+  }
 };
 </script>
 
-<style>
+<style scoped>
 .hotEl {
   margin: 3px 0 0 0px;
   /* border: 1px solid red; */
