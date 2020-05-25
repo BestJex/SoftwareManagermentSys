@@ -19,12 +19,7 @@
         ></el-input>
       </el-form-item>
       <el-form-item label="添加标签" prop="parent">
-        <el-select
-          value-key="model.parent._id"
-          v-model="model.parent"
-          multiple
-          placeholder="请选择"
-        >
+        <el-select value-key="model.parent._id" v-model="model.parent" multiple placeholder="请选择">
           <el-option
             v-for="item in tagList"
             :key="item._id"
@@ -43,15 +38,8 @@
             v-bind:href="model.fileDir"
             @click.native="count"
             target="_blank"
-            >{{ model.fileName }}</el-link
-          >
-          <el-button
-            size="mini"
-            @click="removeFile"
-            type="danger"
-            icon="el-icon-delete"
-            circle
-          ></el-button>
+          >{{ model.fileName }}</el-link>
+          <el-button size="mini" @click="removeFile" type="danger" icon="el-icon-delete" circle></el-button>
         </el-row>
         <div v-if="!model.fileName">
           <el-upload
@@ -62,16 +50,12 @@
             :data="fileData"
           >
             <el-button size="small" type="primary">点击上传</el-button>
-            <div slot="tip" class="el-upload__tip">
-              格式不限，但是不超过100M
-            </div>
+            <div slot="tip" class="el-upload__tip">格式不限，但是不超过100M</div>
           </el-upload>
         </div>
       </el-form-item>
       <el-form-item style="margin-top: 1rem;">
-        <el-button type="primary" class="save" native-type="subumit"
-          >保存</el-button
-        >
+        <el-button type="primary" class="save" native-type="subumit">保存</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -84,7 +68,7 @@ import { restUpdata, restPostData, deleteFile } from "../../Api/api";
 export default {
   name: "SoftWareCreate",
   props: {
-    id: {},
+    id: {}
   },
   data() {
     return {
@@ -96,27 +80,27 @@ export default {
           { required: true, message: "请输入版本号", trigger: "blur" },
           {
             min: 3,
-            max: 15,
-            message: "长度在 3 到 15 个字符",
-            trigger: "blur",
-          },
+            max: 25,
+            message: "长度在 3 到 25 个字符",
+            trigger: "blur"
+          }
         ],
         parent: [
           {
             type: "array",
             required: true,
             message: "请选择关联项目",
-            trigger: "blur",
-          },
+            trigger: "blur"
+          }
         ],
         versionFeatures: [
-          { required: true, message: "请输入版本特性", trigger: "blur" },
-        ],
-      },
+          { required: true, message: "请输入版本特性", trigger: "blur" }
+        ]
+      }
     };
   },
   components: {
-    VueEditor,
+    VueEditor
   },
   methods: {
     async fetchTag() {
@@ -154,7 +138,7 @@ export default {
       this.$notify({
         title: "成功",
         type: "success",
-        message: "保存成功",
+        message: "保存成功"
       });
     },
 
@@ -192,18 +176,18 @@ export default {
           const res = await deleteFile(this.model.fileName);
           this.model.fileName = "";
         })
-        .catch((err) => {
+        .catch(err => {
           console.log(`删除文件错误：`, err);
         });
     },
     async count() {
       await downloadInfo(this.model._id);
-    },
+    }
   },
   created() {
     this.id && this.fetchEdit();
     this.fetchTag();
-  },
+  }
 };
 </script>
 
