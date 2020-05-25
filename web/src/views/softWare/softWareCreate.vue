@@ -13,7 +13,7 @@
       <el-form-item label="版本号" prop="versionNumber">
         <el-input
           id="versionNum"
-          maxlength="16"
+          maxlength="25"
           v-model="model.versionNumber"
           placeholder="命名规则: 版本类型 版本号 主要特性;例如mc 1346 无key版"
         ></el-input>
@@ -80,7 +80,7 @@ export default {
           { required: true, message: "请输入版本号", trigger: "blur" },
           {
             min: 3,
-            max: 25,
+            max: 35,
             message: "长度在 3 到 25 个字符",
             trigger: "blur"
           }

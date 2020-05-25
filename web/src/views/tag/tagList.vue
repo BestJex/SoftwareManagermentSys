@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="title">项目列表:</h1>
+    <h1 class="title">标签列表:</h1>
     <el-table :data="items" border style="width: 100%">
       <el-table-column prop="tagName" label="标签名称"></el-table-column>
       <el-table-column prop="tagFeatures" label="标签简介"></el-table-column>
