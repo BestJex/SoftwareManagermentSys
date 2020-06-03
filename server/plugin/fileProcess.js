@@ -19,7 +19,7 @@ module.exports = (app) => {
   app.post("/api/upload", upload.single("file"), async (req, res) => {
     console.log(req.body.fileName);
     const file = req.file;
-    file.url = `http://192.168.1.172:3322/upload/${file.filename}`;
+    file.url = `http://${req.headers.host}/upload/${file.filename}`;
     file.fileName = file.filename;
     console.log(file);
     res.send(file);
