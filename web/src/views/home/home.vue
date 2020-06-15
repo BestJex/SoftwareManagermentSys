@@ -58,26 +58,30 @@ export default {
 
 .home {
   height: 90vh;
-  min-height: 520px;
-  min-width: 758px;
+  min-height: 630px;
+  min-width: 1000px;
 }
 
 .user {
   height: 37vh;
+  min-height: 280px;
   margin-right: 10px;
 }
 
 .quicklyDownLoad {
   position: relative;
   height: 37vh;
+  min-height: 280px;
   margin-right: 10px;
 }
 
 .hotTag {
   height: 37vh;
+  min-height: 280px;
 }
 .echarts {
   height: 46vh;
+  min-height: 300px;
   margin-top: 10px;
 }
 
